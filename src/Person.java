@@ -7,7 +7,10 @@
 
 public class Person {
 
+
     private boolean adminStatus;
+    private boolean assistantStatus;
+    private boolean studentStatus;
     private String username;
     private String email;
     private int userID;
@@ -26,6 +29,21 @@ public class Person {
         this.userID = userCount;
     }
 
+    public boolean isAssistantStatus() {
+        return assistantStatus;
+    }
+
+    public void setAssistantStatus(boolean assistantStatus) {
+        this.assistantStatus = assistantStatus;
+    }
+
+    public boolean isStudentStatus() {
+        return studentStatus;
+    }
+
+    public void setStudentStatus(boolean studentStatus) {
+        this.studentStatus = studentStatus;
+    }
     public boolean isAdminStatus() {
         return adminStatus;
     }
