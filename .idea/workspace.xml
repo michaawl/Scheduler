@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/RegisterGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/RegisterGUI.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ErrorGUI.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ErrorGUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RegisterGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/RegisterGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RegisterGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RegisterGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +67,9 @@
       <workItem from="1683742039519" duration="4896000" />
       <workItem from="1683747361451" duration="189000" />
       <workItem from="1683747554110" duration="3991000" />
+      <workItem from="1683753789583" duration="381000" />
+      <workItem from="1683754823456" duration="122000" />
+      <workItem from="1683790265626" duration="1950000" />
     </task>
     <servers />
   </component>

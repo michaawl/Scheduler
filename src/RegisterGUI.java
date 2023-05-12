@@ -40,7 +40,7 @@ public class RegisterGUI extends JFrame {
     public RegisterGUI() {
 
 
-        setTitle("Register a User");
+        setTitle("Register a user");
         setContentPane(mainPanel);
         setVisible(true);
         setSize(800, 600);
@@ -120,15 +120,13 @@ public class RegisterGUI extends JFrame {
 
         progressLabel.setText(String.valueOf("Total Users: " + Person.userCount));
 
-        System.out.println(list1.getHeight());
-        System.out.println(list1.getWidth());
-
 
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 boolean errorOcc = false;
+
 
                 if ((usrnmTxtField.getText().isBlank()) || (emailTxtField.getText().isBlank()) || (passwordField1.getPassword().length == 0)) {
                     return;
