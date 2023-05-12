@@ -1,4 +1,4 @@
-Meaning of error codes:
-Code "1": Username already exists
-Code "2": Email already exists
-Code "3": Maximum User Size reached.
+CSV Layouts:
+
+Users:
+Username[String]    Email[String]   Password[String]    admin[boolean]     assistant[boolean]     student[boolean]
