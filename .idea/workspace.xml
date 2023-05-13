@@ -4,12 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="csv files erstellt">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="csv writing works">
+      <change afterPath="$PROJECT_DIR$/src/AdminGUI.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AdminGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AssistantGUI.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AssistantGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/LoginGUI.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/LoginGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/StudentGUI.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/StudentGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RegisterGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RegisterGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/csv/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/users.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,6 +49,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;478&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/micha/IdeaProjects/Schedule&quot;,
@@ -86,7 +92,8 @@
       <workItem from="1683754823456" duration="122000" />
       <workItem from="1683790265626" duration="1950000" />
       <workItem from="1683918856140" duration="6873000" />
-      <workItem from="1683976263206" duration="4010000" />
+      <workItem from="1683976263206" duration="7274000" />
+      <workItem from="1683988271338" duration="4960000" />
     </task>
     <task id="LOCAL-00001" summary="csv files erstellt">
       <created>1683925797406</created>
@@ -102,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683925804689</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="csv writing works">
+      <created>1683981713182</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683981713182</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,6 +135,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="csv files erstellt" />
-    <option name="LAST_COMMIT_MESSAGE" value="csv files erstellt" />
+    <MESSAGE value="csv writing works" />
+    <option name="LAST_COMMIT_MESSAGE" value="csv writing works" />
   </component>
 </project>

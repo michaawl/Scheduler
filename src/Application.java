@@ -51,7 +51,9 @@ public class Application {
 
         }
 
-        RegisterGUI startFrame = new RegisterGUI();
+        //RegisterGUI startFrame = new RegisterGUI();
+        LoginGUI logingui = new LoginGUI();
+
 
     }
 
