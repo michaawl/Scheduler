@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RegisterGUI extends JFrame {
 
@@ -34,7 +35,6 @@ public class RegisterGUI extends JFrame {
     private JRadioButton assistantRadioButton;
     private JRadioButton studentRadioButton;
     static DefaultListModel<String> listModel = new DefaultListModel<>();
-    static ArrayList<Person> PersonArray = new ArrayList<>();
 
 
     public RegisterGUI() {
@@ -69,54 +69,36 @@ public class RegisterGUI extends JFrame {
 
         scrollPane1.setViewportView(list1);
 
+        //set ppl who are already in CSV file
 
-        //generates users to test user maximum
+        for (Person pers : Person.PersonArray) {
 
-        //admin
-        Person pers1 = new Person();
-        String textCaseString = "Admin";
-        pers1.setUsername(textCaseString);
-        pers1.setEmail("admin@email.com");
-        PersonArray.add(pers1);
+            String listString = "";
 
-        textCaseString = pers1.getUserID() + ". ";
-        textCaseString += pers1.getUsername() + " (";
-        textCaseString += "Admin, " + pers1.getEmail() + ")";
-        pers1.setAdminStatus(true);
+            listString = pers.getUserID() + ". ";
+            listString += pers.getUsername() + " (";
 
-        listModel.addElement(textCaseString);
+            if (pers.isAdminStatus()) {
+                listString += "Admin, ";
+            }
 
-        //assistant
-        Person pers2 = new Person();
-        textCaseString = "Assistant";
-        pers2.setUsername(textCaseString);
-        pers2.setEmail("admin@email.com");
-        PersonArray.add(pers2);
+            if (pers.isAssistantStatus()) {
+                listString += "Assistant, ";
+            }
 
-        textCaseString = pers2.getUserID() + ". ";
-        textCaseString += pers2.getUsername() + " (";
-        textCaseString += "Assistant, " + pers2.getEmail() + ")";
-        pers2.setAssistantStatus(true);
+            if (pers.isStudentStatus()) {
+                listString += "Student, ";
+            }
 
-        listModel.addElement(textCaseString);
+            listString += pers.getEmail() + ")";
 
-        for (int i = 0; i <= 5; i++) {
 
-            Person pers = new Person();
-            textCaseString = "Student";
-            pers.setUsername(textCaseString + i);
-            pers.setEmail(textCaseString + i + "@email.com");
-            PersonArray.add(pers);
+            Person.PersonArray.add(pers);
+            progressLabel.setText(String.valueOf("Total Users: " + Person.userCount));
 
-            textCaseString = pers.getUserID() + ". ";
-            textCaseString += pers.getUsername() + " (";
-            textCaseString += "Student, " + pers.getEmail() + ")";
-            pers.setStudentStatus(true);
-
-            listModel.addElement(textCaseString);
+            listModel.addElement(listString);
 
         }
-
 
         progressLabel.setText(String.valueOf("Total Users: " + Person.userCount));
 
@@ -132,14 +114,14 @@ public class RegisterGUI extends JFrame {
                     return;
                 }
 
-                if(!studentRadioButton.isSelected() && !assistantRadioButton.isSelected() && !adminRadioButton.isSelected()){
+                if (!studentRadioButton.isSelected() && !assistantRadioButton.isSelected() && !adminRadioButton.isSelected()) {
                     JOptionPane.showMessageDialog(button1, "Select role");
                     return;
                 }
 
                 for (int i = 0; i < Person.userCount; i++) {
 
-                    if (PersonArray.get(i).getUsername().equals(usrnmTxtField.getText())) {
+                    if (Person.PersonArray.get(i).getUsername().equals(usrnmTxtField.getText())) {
                         // Error message: username duplicate
                         usrnmTxtField.setText("");
                         Icon icon = new ImageIcon("src/media/duplicate.png");
@@ -147,7 +129,7 @@ public class RegisterGUI extends JFrame {
                         errorOcc = true;
                     }
 
-                    if (PersonArray.get(i).getEmail().equals(emailTxtField.getText())) {
+                    if (Person.PersonArray.get(i).getEmail().equals(emailTxtField.getText())) {
                         // Error message: email duplicate
                         emailTxtField.setText("");
 
@@ -167,6 +149,10 @@ public class RegisterGUI extends JFrame {
                 pers.setAdminStatus(adminRadioButton.isSelected());
                 pers.setAssistantStatus(assistantRadioButton.isSelected());
                 pers.setStudentStatus(studentRadioButton.isSelected());
+
+                char[] password = passwordField1.getPassword();
+                String passwordString = new String(password);
+                pers.setPassword(passwordString);
                 String listString = "";
 
                 listString = pers.getUserID() + ". ";
@@ -184,24 +170,21 @@ public class RegisterGUI extends JFrame {
                     listString += "Student, ";
                 }
 
-
-
                 listString += pers.getEmail() + ")";
 
 
-                PersonArray.add(pers);
+                Person.PersonArray.add(pers);
                 progressLabel.setText(String.valueOf("Total Users: " + Person.userCount));
 
-                //usrnmTxtField.setText("");
-                //emailTxtField.setText("");
-                //passwordField1.setText("");
-
                 listModel.addElement(listString);
+
+                //write to csv file
+                listString = pers.getUsername() + "," + pers.getEmail() + "," + pers.getPassword() + "," + pers.isAdminStatus() + "," + pers.isAssistantStatus() + "," + pers.isStudentStatus();
+                Application.writeToCSVFile(listString, "src/csv/users.csv");
 
             }
         });
     }
-
 
 
     private void createUIComponents() {

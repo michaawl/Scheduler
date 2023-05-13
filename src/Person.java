@@ -5,6 +5,9 @@
  * Last Change: 03.05.2023
  */
 
+import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 public class Person {
 
 
@@ -14,6 +17,10 @@ public class Person {
     private String username;
     private String email;
     private int userID;
+    private String password;
+
+    static CopyOnWriteArrayList<Person> PersonArray = new CopyOnWriteArrayList<>();
+
     static int userCount = 0;
 
     public int getUserID() {
@@ -26,9 +33,22 @@ public class Person {
 
     public Person() {
         userCount++;
+
+        //set all false, so only the status set becomes true afterwards
+        this.adminStatus = false;
+        this.assistantStatus = false;
+        this.studentStatus = false;
+
         this.userID = userCount;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public boolean isAssistantStatus() {
         return assistantStatus;
     }
