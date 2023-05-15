@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="csv writing works">
-      <change afterPath="$PROJECT_DIR$/src/AdminGUI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AdminGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AssistantGUI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AssistantGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/LoginGUI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/LoginGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/StudentGUI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/StudentGUI.java" afterDir="false" />
+    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="laptop version 2 weeks before dl">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/csv/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/users.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AssistantGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/AssistantGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AssistantGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AssistantGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StudentGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudentGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StudentGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudentGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,25 +40,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;478&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/micha/IdeaProjects/Schedule&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "101",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "6",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/micha/IdeaProjects/Schedule",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\micha\IdeaProjects\Schedule" />
@@ -92,8 +91,12 @@
       <workItem from="1683754823456" duration="122000" />
       <workItem from="1683790265626" duration="1950000" />
       <workItem from="1683918856140" duration="6873000" />
-      <workItem from="1683976263206" duration="7274000" />
-      <workItem from="1683988271338" duration="4960000" />
+      <workItem from="1683976263206" duration="4010000" />
+      <workItem from="1684022473144" duration="1459000" />
+      <workItem from="1684070429596" duration="3372000" />
+      <workItem from="1684076382633" duration="1070000" />
+      <workItem from="1684077479154" duration="154000" />
+      <workItem from="1684133611661" duration="1581000" />
     </task>
     <task id="LOCAL-00001" summary="csv files erstellt">
       <created>1683925797406</created>
@@ -109,14 +112,7 @@
       <option name="project" value="LOCAL" />
       <updated>1683925804689</updated>
     </task>
-    <task id="LOCAL-00003" summary="csv writing works">
-      <created>1683981713182</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1683981713182</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,7 +131,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="csv files erstellt" />
-    <MESSAGE value="csv writing works" />
-    <option name="LAST_COMMIT_MESSAGE" value="csv writing works" />
+    <option name="LAST_COMMIT_MESSAGE" value="csv files erstellt" />
   </component>
 </project>
