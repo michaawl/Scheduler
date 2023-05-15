@@ -17,7 +17,7 @@ public class AdminGUI {
     private JButton editUsersButton;
     private JButton logOutButton;
     private JButton createNewCourseButton;
-    private JButton editCoursesAndRoomsButton;
+    private JButton editorButton;
     private JTabbedPane tabbedPane1;
     private JList list3;
     private JTextField textField1;
@@ -40,5 +40,11 @@ public class AdminGUI {
     private JList list9;
     private JButton changeRoomButton;
     private JButton mainMenuButton4;
-    private JTextField textField3;
+    private JComboBox comboBox6;
+    private JComboBox comboBox7;
+    private JComboBox comboBox8;
+    private JComboBox comboBox9;
+    private JButton confirmEditButton;
+    private JButton addButton2;
+    private JButton deleteButton;
 }
