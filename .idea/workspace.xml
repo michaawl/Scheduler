@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="only preferences and edit teacher GUI left">
-      <change afterPath="$PROJECT_DIR$/src/Preferences.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Preferences.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="Complete GUI done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AdminGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminGUI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AdminGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminGUI.java" afterDir="false" />
@@ -47,7 +44,7 @@
     "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
     "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "101",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "142",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "182",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/micha/IdeaProjects/Schedule",
@@ -99,7 +96,9 @@
       <workItem from="1684135306130" duration="1107000" />
       <workItem from="1684136449288" duration="351000" />
       <workItem from="1684136821278" duration="43000" />
-      <workItem from="1684136888281" duration="629000" />
+      <workItem from="1684136888281" duration="2079000" />
+      <workItem from="1684141361030" duration="3000" />
+      <workItem from="1684141429959" duration="134000" />
     </task>
     <task id="LOCAL-00001" summary="csv files erstellt">
       <created>1683925797406</created>
@@ -122,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684135251222</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Complete GUI done">
+      <created>1684137635036</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1684137635036</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,6 +148,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="csv files erstellt" />
     <MESSAGE value="only preferences and edit teacher GUI left" />
-    <option name="LAST_COMMIT_MESSAGE" value="only preferences and edit teacher GUI left" />
+    <MESSAGE value="Complete GUI done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Complete GUI done" />
   </component>
 </project>

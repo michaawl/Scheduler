@@ -44,7 +44,8 @@ public class AdminGUI {
     private JComboBox comboBox7;
     private JComboBox comboBox8;
     private JComboBox comboBox9;
-    private JButton confirmEditButton;
+    private JButton confrimEditButton;
     private JButton addButton2;
     private JButton deleteButton;
+    private JButton checkConsistencyButton;
 }
