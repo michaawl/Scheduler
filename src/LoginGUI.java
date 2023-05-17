@@ -33,6 +33,7 @@ public class LoginGUI extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         panel1.setBorder(new EmptyBorder(50, 20, 0, 20));
+        setLocationRelativeTo(null); //centering window
 
         loginbutton.addActionListener(new ActionListener() {
             @Override
@@ -58,6 +59,12 @@ public class LoginGUI extends JFrame{
                             passwordexists = true;
                             errorLbl.setForeground(Color.GREEN);
                             errorLbl.setText("Login successful!");
+
+                            getContentPane().remove(loginPanel);
+                            dispose(); //release any resources associated with it and close the window
+
+                            AdminGUI adminGUI = new AdminGUI();
+
                         }
 
                     }

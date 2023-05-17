@@ -1,7 +1,11 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class AdminGUI {
-    private JPanel panel1;
+public class AdminGUI extends JFrame{
+    private JPanel panelMain;
     private JList list1;
     private JList list2;
     private JComboBox comboBox1;
@@ -12,9 +16,9 @@ public class AdminGUI {
     private JButton createCourseButton;
     private JButton viewCourseDetailsButton;
     private JButton viewRoomDetailsButton;
-    private JButton mainMenuButton;
+    private JButton backButton;
     private JButton preferencesButton;
-    private JButton editUsersButton;
+    private JButton registerAndEditUsersButton;
     private JButton logOutButton;
     private JButton createNewCourseButton;
     private JButton editorButton;
@@ -23,23 +27,23 @@ public class AdminGUI {
     private JTextField textField1;
     private JButton addButton;
     private JButton deleteSelectedCourseButton;
-    private JButton mainMenuButton1;
+    private JButton backButton3;
     private JList list4;
     private JTextField textField2;
     private JButton addButton1;
     private JButton deleteSelectedRoomButton;
-    private JButton mainMenuButton2;
+    private JButton backButton2;
     private JButton addRemoveStudentsFromButton;
     private JList list5;
     private JList list6;
     private JButton addStudentToAButton;
     private JButton removeStudentFromSelectedButton;
-    private JButton mainMenuButton3;
+    private JButton backButton4;
     private JList list7;
     private JList list8;
     private JList list9;
     private JButton changeRoomButton;
-    private JButton mainMenuButton4;
+    private JButton backButton1;
     private JComboBox comboBox6;
     private JComboBox comboBox7;
     private JComboBox comboBox8;
@@ -48,4 +52,109 @@ public class AdminGUI {
     private JButton addButton2;
     private JButton deleteButton;
     private JButton checkConsistencyButton;
+    private JPanel panel1;
+    private JPanel panel2;
+    private JPanel panel3;
+    private JPanel panel4;
+    private JPanel panel21;
+    private JPanel panel22;
+    private JPanel arCPanel;
+    private JPanel arRPanel;
+    private JPanel cePanel;
+
+    public AdminGUI(){
+
+        // Set the layout manager for the main panel
+        panelMain.setLayout(new CardLayout());
+
+        // Add panels to the main panel
+        panelMain.add(panel1, "panel1");
+        panelMain.add(panel2, "panel2");
+        panelMain.add(panel3, "panel3");
+        panelMain.add(panel4, "panel4");
+
+        // Show panel2
+        CardLayout cardLayout = (CardLayout) panelMain.getLayout();
+        cardLayout.show(panelMain, "panel2");
+
+        // Add the main panel to the JFrame content pane
+        getContentPane().add(panelMain);
+
+        // Set JFrame properties
+        setTitle("Admin GUI");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(700,500);
+        panel21.setBorder(new EmptyBorder(50, 20, 20, 20));
+        panel22.setBorder(new EmptyBorder(50, 20, 20, 20));
+        setLocationRelativeTo(null); //centering window
+        setVisible(true);
+
+
+        logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                getContentPane().remove(panelMain);
+                dispose(); //release any resources associated with it and close the window
+
+                LoginGUI loginGUI = new LoginGUI();
+
+            }
+        });
+        createNewCourseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelMain, "panel1");
+            }
+        });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelMain, "panel2");
+            }
+        });
+        backButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelMain, "panel2");
+            }
+        });
+        backButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelMain, "panel2");
+            }
+        });
+        backButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelMain, "panel2");
+            }
+        });
+        editorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelMain, "panel3");
+            }
+        });
+        addRemoveStudentsFromButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelMain, "panel4");
+            }
+        });
+        backButton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelMain, "panel2");
+            }
+        });
+        registerAndEditUsersButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RegisterGUI startFrame = new RegisterGUI();
+            }
+        });
+    }
+
 }

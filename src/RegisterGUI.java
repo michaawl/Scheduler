@@ -10,8 +10,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class RegisterGUI extends JFrame {
 
@@ -34,6 +34,7 @@ public class RegisterGUI extends JFrame {
     private JRadioButton adminRadioButton;
     private JRadioButton assistantRadioButton;
     private JRadioButton studentRadioButton;
+    private JButton backButton;
     static DefaultListModel<String> listModel = new DefaultListModel<>();
 
 
@@ -44,8 +45,8 @@ public class RegisterGUI extends JFrame {
         setContentPane(mainPanel);
         setVisible(true);
         setSize(800, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         imageLabel.setText("");
+        setLocationRelativeTo(null);
 
         mainPanel.setSize(500, 500);
         rightPanel.setBorder(new EmptyBorder(50, 10, 10, 10));
@@ -61,6 +62,15 @@ public class RegisterGUI extends JFrame {
         adminRadioButton.setBorder(new EmptyBorder(10, 10, 0, 0));
         assistantRadioButton.setBorder(new EmptyBorder(0, 10, 0, 0));
         studentRadioButton.setBorder(new EmptyBorder(0, 10, 0, 0));
+
+
+        //diposes panel when red button is clicked
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
 
 
         JList list1 = new JList();
@@ -182,6 +192,13 @@ public class RegisterGUI extends JFrame {
                 listString = pers.getUsername() + "," + pers.getEmail() + "," + pers.getPassword() + "," + pers.isAdminStatus() + "," + pers.isAssistantStatus() + "," + pers.isStudentStatus();
                 Application.writeToCSVFile(listString, "src/csv/users.csv");
 
+            }
+        });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getContentPane().remove(mainPanel);
+                dispose(); //release any resources associated with it and close the window
             }
         });
     }
