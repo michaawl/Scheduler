@@ -35,11 +35,11 @@ public class RegisterGUI extends JFrame {
     private JRadioButton assistantRadioButton;
     private JRadioButton studentRadioButton;
     private JButton backButton;
+    private JButton deleteButton;
     static DefaultListModel<String> listModel = new DefaultListModel<>();
 
 
     public RegisterGUI() {
-
 
         setTitle("Register a user");
         setContentPane(mainPanel);
@@ -58,6 +58,7 @@ public class RegisterGUI extends JFrame {
         leftLabel.setFont(new Font("Calibri", Font.BOLD, 16));
         rightLabel.setFont(new Font("Calibri", Font.BOLD, 16));
         button1.setText("Create User");
+        deleteButton.setText("Delete User");
 
         adminRadioButton.setBorder(new EmptyBorder(10, 10, 0, 0));
         assistantRadioButton.setBorder(new EmptyBorder(0, 10, 0, 0));
@@ -74,41 +75,12 @@ public class RegisterGUI extends JFrame {
 
 
         JList list1 = new JList();
-
         list1.setModel(listModel);
+
+        refreshList();
 
         scrollPane1.setViewportView(list1);
 
-        //set ppl who are already in CSV file
-
-        for (Person pers : Person.PersonArray) {
-
-            String listString = "";
-
-            listString = pers.getUserID() + ". ";
-            listString += pers.getUsername() + " (";
-
-            if (pers.isAdminStatus()) {
-                listString += "Admin, ";
-            }
-
-            if (pers.isAssistantStatus()) {
-                listString += "Assistant, ";
-            }
-
-            if (pers.isStudentStatus()) {
-                listString += "Student, ";
-            }
-
-            listString += pers.getEmail() + ")";
-
-
-            Person.PersonArray.add(pers);
-            progressLabel.setText(String.valueOf("Total Users: " + Person.userCount));
-
-            listModel.addElement(listString);
-
-        }
 
         progressLabel.setText(String.valueOf("Total Users: " + Person.userCount));
 
@@ -129,7 +101,7 @@ public class RegisterGUI extends JFrame {
                     return;
                 }
 
-                for (int i = 0; i < Person.userCount; i++) {
+                for (int i = 0; i < Person.PersonArray.size(); i++) {
 
                     if (Person.PersonArray.get(i).getUsername().equals(usrnmTxtField.getText())) {
                         // Error message: username duplicate
@@ -163,6 +135,7 @@ public class RegisterGUI extends JFrame {
                 char[] password = passwordField1.getPassword();
                 String passwordString = new String(password);
                 pers.setPassword(passwordString);
+
                 String listString = "";
 
                 listString = pers.getUserID() + ". ";
@@ -199,8 +172,54 @@ public class RegisterGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 getContentPane().remove(mainPanel);
                 dispose(); //release any resources associated with it and close the window
+
+                AdminGUI adminGUI = new AdminGUI();
             }
         });
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String selectedItem = list1.getSelectedValue().toString();
+                progressLabel.setText(selectedItem);
+
+
+            }
+        });
+    }
+
+    //set ppl who are already in CSV file
+    public void refreshList(){
+
+        listModel.clear();
+
+        for (Person pers : Person.PersonArray) {
+
+            String listString = "";
+
+            listString = pers.getUserID() + ". ";
+            listString += pers.getUsername() + " (";
+
+            if (pers.isAdminStatus()) {
+                listString += "Admin, ";
+            }
+
+            if (pers.isAssistantStatus()) {
+                listString += "Assistant, ";
+            }
+
+            if (pers.isStudentStatus()) {
+                listString += "Student, ";
+            }
+
+            listString += pers.getEmail() + ")";
+
+            progressLabel.setText(String.valueOf("Total Users: " + Person.userCount));
+
+            listModel.addElement(listString);
+
+        }
+
     }
 
 

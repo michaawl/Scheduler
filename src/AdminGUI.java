@@ -61,6 +61,8 @@ public class AdminGUI extends JFrame{
     private JPanel arCPanel;
     private JPanel arRPanel;
     private JPanel cePanel;
+    private javax.swing.JPanel JPanel;
+    private JPanel JPanel2;
 
     public AdminGUI(){
 
@@ -83,11 +85,14 @@ public class AdminGUI extends JFrame{
         // Set JFrame properties
         setTitle("Admin GUI");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700,500);
+        setSize(1200,600);
         panel21.setBorder(new EmptyBorder(50, 20, 20, 20));
         panel22.setBorder(new EmptyBorder(50, 20, 20, 20));
         setLocationRelativeTo(null); //centering window
+
         setVisible(true);
+
+
 
 
         logOutButton.addActionListener(new ActionListener() {
@@ -152,6 +157,9 @@ public class AdminGUI extends JFrame{
         registerAndEditUsersButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                getContentPane().remove(panelMain);
+                dispose();
                 RegisterGUI startFrame = new RegisterGUI();
             }
         });

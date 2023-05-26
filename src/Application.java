@@ -7,9 +7,21 @@ public class Application {
     static void writeToCSVFile(String line, String filepath){
 
         try{
-            FileWriter csvWriter = new FileWriter(filepath, true);
+            BufferedWriter csvWriter = new BufferedWriter(new FileWriter(filepath, true)); //append just adds and doesnt delete everything
             csvWriter.write(line + "\n");
             csvWriter.flush();
+
+        }catch (IOException e){
+
+        }
+    }
+
+    static void deleteFromCSVFile(String filepath){
+
+        try{
+
+            BufferedReader reader = new BufferedReader(new FileReader(filepath));
+            FileWriter csvWriter = new FileWriter(filepath);
 
         }catch (IOException e){
 
@@ -17,15 +29,15 @@ public class Application {
 
     }
 
+
     public static void main(String[] args) {
 
         String filepath = "src/csv/users.csv";
-        BufferedReader reader = null;
         String line = "";
 
         try {
 
-            reader = new BufferedReader(new FileReader(filepath));
+            BufferedReader reader = new BufferedReader(new FileReader(filepath));
             while ((line = reader.readLine()) != null) {
 
                 String[] data = line.split(",");
@@ -52,7 +64,9 @@ public class Application {
         }
 
         //LoginGUI logingui = new LoginGUI();
-        AdminGUI adminGUI = new AdminGUI();
+        //AdminGUI adminGUI = new AdminGUI();
+        RegisterGUI registerGUI = new RegisterGUI();
+
 
     }
 
