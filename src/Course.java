@@ -6,6 +6,17 @@ public class Course {
     private String room;
     private int startTime;
     private int endTime;
+
+    private String day;
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
     static CopyOnWriteArrayList<Course> CourseArray = new CopyOnWriteArrayList<>();
 
     public String getRoom() {

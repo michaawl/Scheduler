@@ -9,8 +9,6 @@ public class AdminGUI extends JFrame{
     private JComboBox comboBox1;
     private JComboBox comboBox2;
     private JComboBox comboBox3;
-    private JComboBox comboBox4;
-    private JComboBox comboBox5;
     private JButton ccCreate;
     private JButton ccVC;
     private JButton ccVR;
@@ -63,6 +61,7 @@ public class AdminGUI extends JFrame{
     private JPanel JPanel2;
     private JScrollPane scrollPane1;
     private JScrollPane scrollPane2;
+    private JLabel msgLbl;
 
     static DefaultListModel<String> cclistModel1 = new DefaultListModel<>();
     static DefaultListModel<String> cclistModel2 = new DefaultListModel<>();
@@ -109,58 +108,29 @@ public class AdminGUI extends JFrame{
         scrollPane1.setViewportView(ccListC);
         scrollPane2.setViewportView(ccListR);
 
-        for(Course course: Course.CourseArray){
-            cclistModel1.addElement(course.getCourse());
-        }
-
-        for(Room room : Room.RoomArray){
-            cclistModel2.addElement(room.getRoom());
-        }
-
-
-
-
-        /*
-
-        JList list1 = new JList();
-        list1.setModel(listModel);
-
-        refreshList();
-
-        scrollPane1.setViewportView(list1);
-
-        listModel.clear();
-
-        for (Person pers : Person.PersonArray) {
-
-            String listString = "";
-
-            listString += pers.getUsername() + " (";
-
-            if (pers.isAdminStatus()) {
-                listString += "Admin, ";
-            }
-
-            if (pers.isAssistantStatus()) {
-                listString += "Assistant, ";
-            }
-
-            if (pers.isStudentStatus()) {
-                listString += "Student, ";
-            }
-
-            listString += pers.getEmail() + ")";
-
-            progressLabel.setText(String.valueOf("Total Users: " + Person.userCount));
-
-            listModel.addElement(listString);
-
-        }
-         */
-
         ccCreate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                int start = Integer.parseInt(comboBox2.getSelectedItem().toString());
+                int end = Integer.parseInt(comboBox3.getSelectedItem().toString());
+                String courseStrg = ccListC.getSelectedValue().toString();
+                String room = ccListR.getSelectedValue().toString();
+                String day = comboBox1.getSelectedItem().toString();
+
+                msgLbl.setText("Created course: " + courseStrg + " in room " +
+                        room + " from " + day + ", " + start + ":00h to " +end + ":00h");
+
+                String line = courseStrg + "," + room + "," + day + "," + start + "," + end;
+
+                Application.writeToCSVFile(line, "src/csv/timetable.csv");
+
+                Course course = new Course();
+                course.setCourse(courseStrg);
+                course.setRoom(room);
+                course.setStartTime(start);
+                course.setEndTime(end);
+                course.setDay(day);
 
             }
         });
@@ -195,6 +165,18 @@ public class AdminGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelMain, "panel1");
+
+                cclistModel1.clear();
+                cclistModel2.clear();
+
+                for(Course course: Course.CourseArray){
+                    cclistModel1.addElement(course.getCourse());
+                }
+
+                for(Room room : Room.RoomArray){
+                    cclistModel2.addElement(room.getRoom());
+                }
+
             }
         });
 
