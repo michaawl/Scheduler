@@ -6,21 +6,19 @@ import java.awt.event.ActionListener;
 
 public class AdminGUI extends JFrame{
     private JPanel panelMain;
-    private JList list1;
-    private JList list2;
     private JComboBox comboBox1;
     private JComboBox comboBox2;
     private JComboBox comboBox3;
     private JComboBox comboBox4;
     private JComboBox comboBox5;
-    private JButton createCourseButton;
-    private JButton viewCourseDetailsButton;
-    private JButton viewRoomDetailsButton;
-    private JButton backButton;
+    private JButton ccCreate;
+    private JButton ccVC;
+    private JButton ccVR;
+    private JButton ccBack;
     private JButton preferencesButton;
     private JButton registerAndEditUsersButton;
     private JButton logOutButton;
-    private JButton createNewCourseButton;
+    private JButton mainCC;
     private JButton editorButton;
     private JTabbedPane tabbedPane1;
     private JList list3;
@@ -63,6 +61,11 @@ public class AdminGUI extends JFrame{
     private JPanel cePanel;
     private javax.swing.JPanel JPanel;
     private JPanel JPanel2;
+    private JScrollPane scrollPane1;
+    private JScrollPane scrollPane2;
+
+    static DefaultListModel<String> cclistModel1 = new DefaultListModel<>();
+    static DefaultListModel<String> cclistModel2 = new DefaultListModel<>();
 
     public AdminGUI(){
 
@@ -93,6 +96,111 @@ public class AdminGUI extends JFrame{
         setVisible(true);
 
 
+        /*
+        ################### CREATER COURSE PANEL ###################
+         */
+
+        JList ccListC = new JList();
+        JList ccListR = new JList();
+
+        ccListC.setModel(cclistModel1);
+        ccListR.setModel(cclistModel2);
+
+        scrollPane1.setViewportView(ccListC);
+        scrollPane2.setViewportView(ccListR);
+
+        for(Course course: Course.CourseArray){
+            cclistModel1.addElement(course.getCourse());
+        }
+
+        for(Room room : Room.RoomArray){
+            cclistModel2.addElement(room.getRoom());
+        }
+
+
+
+
+        /*
+
+        JList list1 = new JList();
+        list1.setModel(listModel);
+
+        refreshList();
+
+        scrollPane1.setViewportView(list1);
+
+        listModel.clear();
+
+        for (Person pers : Person.PersonArray) {
+
+            String listString = "";
+
+            listString += pers.getUsername() + " (";
+
+            if (pers.isAdminStatus()) {
+                listString += "Admin, ";
+            }
+
+            if (pers.isAssistantStatus()) {
+                listString += "Assistant, ";
+            }
+
+            if (pers.isStudentStatus()) {
+                listString += "Student, ";
+            }
+
+            listString += pers.getEmail() + ")";
+
+            progressLabel.setText(String.valueOf("Total Users: " + Person.userCount));
+
+            listModel.addElement(listString);
+
+        }
+         */
+
+        ccCreate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        ccVC.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        ccVC.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        ccVR.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        ccBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelMain, "panel2");
+            }
+        });
+
+        mainCC.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelMain, "panel1");
+            }
+        });
+
+        /*
+        ################### CREATER COURSE PANEL ###################
+         */
 
 
         logOutButton.addActionListener(new ActionListener() {
@@ -106,18 +214,8 @@ public class AdminGUI extends JFrame{
 
             }
         });
-        createNewCourseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelMain, "panel1");
-            }
-        });
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelMain, "panel2");
-            }
-        });
+
+
         backButton3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -163,6 +261,8 @@ public class AdminGUI extends JFrame{
                 RegisterGUI startFrame = new RegisterGUI();
             }
         });
+
+
     }
 
 }
