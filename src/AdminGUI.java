@@ -17,14 +17,12 @@ public class AdminGUI extends JFrame{
     private JButton registerAndEditUsersButton;
     private JButton logOutButton;
     private JButton mainCC;
-    private JButton editorButton;
+    private JButton mainEditor;
     private JTabbedPane tabbedPane1;
-    private JList list3;
     private JTextField textField1;
     private JButton addButton;
     private JButton deleteSelectedCourseButton;
     private JButton backButton3;
-    private JList list4;
     private JTextField textField2;
     private JButton addButton1;
     private JButton deleteSelectedRoomButton;
@@ -35,14 +33,9 @@ public class AdminGUI extends JFrame{
     private JButton addStudentToAButton;
     private JButton removeStudentFromSelectedButton;
     private JButton backButton4;
-    private JList list7;
-    private JList list8;
-    private JList list9;
     private JButton changeRoomButton;
     private JButton backButton1;
     private JComboBox comboBox6;
-    private JComboBox comboBox7;
-    private JComboBox comboBox8;
     private JComboBox comboBox9;
     private JButton confrimEditButton;
     private JButton addButton2;
@@ -62,9 +55,14 @@ public class AdminGUI extends JFrame{
     private JScrollPane scrollPane1;
     private JScrollPane scrollPane2;
     private JLabel msgLbl;
+    private JScrollPane scrollPane3;
+    private JScrollPane scrollPane4;
+    private JScrollPane scrollPane5;
+    private JPanel scrollPane6;
+    private JScrollPane scrollPane7;
 
-    static DefaultListModel<String> cclistModel1 = new DefaultListModel<>();
-    static DefaultListModel<String> cclistModel2 = new DefaultListModel<>();
+    static DefaultListModel<String> courseListModel = new DefaultListModel<>();
+    static DefaultListModel<String> roomListModel = new DefaultListModel<>();
 
     public AdminGUI(){
 
@@ -99,14 +97,15 @@ public class AdminGUI extends JFrame{
         ################### CREATER COURSE PANEL ###################
          */
 
-        JList ccListC = new JList();
-        JList ccListR = new JList();
+        JList ccCourseList = new JList();
+        JList ccRoomList = new JList();
 
-        ccListC.setModel(cclistModel1);
-        ccListR.setModel(cclistModel2);
+        ccCourseList.setModel(courseListModel);
+        ccRoomList.setModel(roomListModel);
 
-        scrollPane1.setViewportView(ccListC);
-        scrollPane2.setViewportView(ccListR);
+        scrollPane1.setViewportView(ccCourseList);
+        scrollPane2.setViewportView(ccRoomList);
+
 
         ccCreate.addActionListener(new ActionListener() {
             @Override
@@ -114,8 +113,8 @@ public class AdminGUI extends JFrame{
 
                 int start = Integer.parseInt(comboBox2.getSelectedItem().toString());
                 int end = Integer.parseInt(comboBox3.getSelectedItem().toString());
-                String courseStrg = ccListC.getSelectedValue().toString();
-                String room = ccListR.getSelectedValue().toString();
+                String courseStrg = ccCourseList.getSelectedValue().toString();
+                String room = ccRoomList.getSelectedValue().toString();
                 String day = comboBox1.getSelectedItem().toString();
 
                 msgLbl.setText("Created course: " + courseStrg + " in room " +
@@ -166,22 +165,143 @@ public class AdminGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelMain, "panel1");
 
-                cclistModel1.clear();
-                cclistModel2.clear();
+                courseListModel.clear();
+                roomListModel.clear();
 
                 for(Course course: Course.CourseArray){
-                    cclistModel1.addElement(course.getCourse());
+                    courseListModel.addElement(course.getCourse());
                 }
 
                 for(Room room : Room.RoomArray){
-                    cclistModel2.addElement(room.getRoom());
+                    roomListModel.addElement(room.getRoom());
                 }
 
             }
         });
 
         /*
-        ################### CREATER COURSE PANEL ###################
+        ################### EDITOR ###################
+         */
+
+        JList eCourseList = new JList<>();
+        JList eCourseList2 = new JList<>();
+        JList eRoomList = new JList();
+
+        eCourseList.setModel(courseListModel);
+        eCourseList2.setModel(courseListModel);
+        eRoomList.setModel(roomListModel);
+
+        scrollPane3.setViewportView(eCourseList);
+        scrollPane4.setViewportView(eRoomList);
+        scrollPane5.setViewportView(eCourseList2);
+
+        mainEditor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelMain, "panel3");
+
+                courseListModel.clear();
+                roomListModel.clear();
+
+                for(Course course: Course.CourseArray){
+                    courseListModel.addElement(course.getCourse());
+                }
+
+                for(Room room : Room.RoomArray){
+                    roomListModel.addElement(room.getRoom());
+                }
+            }
+        });
+
+        //####### Edit Course #######
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String addCourseString = textField1.getText();
+                if(!addCourseString.isBlank()){
+
+                    Application.writeToCSVFile(addCourseString, "src/csv/courses.csv");
+
+                    Course newCourse = new Course();
+                    newCourse.setCourse(addCourseString);
+                    Course.CourseArray.add(newCourse);
+
+                    courseListModel.clear();
+
+                    for(Course course: Course.CourseArray){
+                        courseListModel.addElement(course.getCourse());
+                    }
+                }
+            }
+        });
+
+        deleteSelectedCourseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int deleteLine = eCourseList.getSelectedIndex();
+                System.out.println(deleteLine);
+
+                Application.deleteFromCSVFile("src/csv/courses.csv",deleteLine);
+                Course.CourseArray.remove(deleteLine);
+
+                courseListModel.clear();
+                for(Course course: Course.CourseArray){
+                    courseListModel.addElement(course.getCourse());
+                }
+
+
+            }
+        });
+
+        //####### Edit Room #######
+
+        addButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String addRoomString = textField2.getText();
+                if(!addRoomString.isBlank()){
+
+                    Application.writeToCSVFile(addRoomString, "src/csv/rooms.csv");
+
+                    Room newRoom = new Room();
+                    newRoom.setRoom(addRoomString);
+                    Room.RoomArray.add(newRoom);
+
+                    roomListModel.clear();
+
+                    for(Room room : Room.RoomArray){
+                        roomListModel.addElement(room.getRoom());
+                    }
+                }
+
+            }
+        });
+
+        deleteSelectedRoomButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int deleteLine = eRoomList.getSelectedIndex();
+                System.out.println(deleteLine);
+
+                Application.deleteFromCSVFile("src/csv/rooms.csv",deleteLine);
+                Room.RoomArray.remove(deleteLine);
+
+                roomListModel.clear();
+                for(Room room : Room.RoomArray){
+                    roomListModel.addElement(room.getRoom());
+                }
+
+            }
+        });
+
+
+        /*
+        ################### EDITOR ###################
          */
 
 
@@ -216,12 +336,7 @@ public class AdminGUI extends JFrame{
                 cardLayout.show(panelMain, "panel2");
             }
         });
-        editorButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelMain, "panel3");
-            }
-        });
+
         addRemoveStudentsFromButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -243,7 +358,6 @@ public class AdminGUI extends JFrame{
                 RegisterGUI startFrame = new RegisterGUI();
             }
         });
-
 
     }
 

@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="delete line works">
-      <change afterPath="$PROJECT_DIR$/src/csv/timetable.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AdminGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminGUI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AdminGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/csv/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/users.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csv/courses.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/courses.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csv/timetable.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/timetable.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +46,7 @@
     "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
     "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "101",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "216",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "268",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/micha/IdeaProjects/Schedule",
@@ -193,26 +192,5 @@
     <MESSAGE value="buttons on admin thing work" />
     <MESSAGE value="delete line works" />
     <option name="LAST_COMMIT_MESSAGE" value="delete line works" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Application.java</url>
-          <line>112</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Application.java</url>
-          <line>135</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Application.java</url>
-          <line>74</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

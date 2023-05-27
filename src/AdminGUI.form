@@ -376,7 +376,7 @@
                   <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                 </constraints>
               </vspacer>
-              <component id="764e" class="javax.swing.JButton" binding="editorButton" default-binding="true">
+              <component id="764e" class="javax.swing.JButton" binding="mainEditor">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -445,14 +445,14 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="8154d" class="javax.swing.JList" binding="list3" default-binding="true">
+                      <scrollpane id="afa5d" binding="scrollPane3">
                         <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                            <preferred-size width="150" height="50"/>
-                          </grid>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties/>
-                      </component>
+                        <border type="none"/>
+                        <children/>
+                      </scrollpane>
                     </children>
                   </grid>
                   <grid id="42fbd" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -533,16 +533,14 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="e9f8f" class="javax.swing.JList" binding="list4" default-binding="true">
+                      <scrollpane id="7f676" binding="scrollPane4">
                         <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                            <preferred-size width="150" height="50"/>
-                          </grid>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                         </constraints>
-                        <properties>
-                          <model/>
-                        </properties>
-                      </component>
+                        <properties/>
+                        <border type="none"/>
+                        <children/>
+                      </scrollpane>
                     </children>
                   </grid>
                   <grid id="26241" binding="JPanel" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -623,32 +621,6 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="557" class="javax.swing.JList" binding="list7" default-binding="true">
-                        <constraints>
-                          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                            <preferred-size width="150" height="50"/>
-                          </grid>
-                        </constraints>
-                        <properties/>
-                      </component>
-                      <component id="d197e" class="javax.swing.JList" binding="list8" default-binding="true">
-                        <constraints>
-                          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                            <preferred-size width="150" height="50"/>
-                          </grid>
-                        </constraints>
-                        <properties>
-                          <model/>
-                        </properties>
-                      </component>
-                      <component id="42f39" class="javax.swing.JList" binding="list9" default-binding="true">
-                        <constraints>
-                          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                            <preferred-size width="150" height="50"/>
-                          </grid>
-                        </constraints>
-                        <properties/>
-                      </component>
                       <component id="323aa" class="javax.swing.JLabel">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -673,6 +645,31 @@
                           <text value="Available rooms:"/>
                         </properties>
                       </component>
+                      <scrollpane id="487a6" binding="scrollPane5">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties/>
+                        <border type="none"/>
+                        <children/>
+                      </scrollpane>
+                      <grid id="9654c" binding="scrollPane6" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                        <margin top="0" left="0" bottom="0" right="0"/>
+                        <constraints>
+                          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties/>
+                        <border type="none"/>
+                        <children/>
+                      </grid>
+                      <scrollpane id="dd667" binding="scrollPane7">
+                        <constraints>
+                          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties/>
+                        <border type="none"/>
+                        <children/>
+                      </scrollpane>
                     </children>
                   </grid>
                   <grid id="6f1bc" binding="JPanel2" layout-manager="GridBagLayout">
@@ -691,18 +688,9 @@
                           <text value="Current room of selected course at selected timeslot:"/>
                         </properties>
                       </component>
-                      <component id="41fe7" class="javax.swing.JButton" binding="changeRoomButton" default-binding="true">
-                        <constraints>
-                          <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <text value="Change room"/>
-                        </properties>
-                      </component>
                       <component id="a301d" class="javax.swing.JButton" binding="backButton1" default-binding="true">
                         <constraints>
-                          <grid row="11" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="9" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="1.0" weighty="0.0"/>
                         </constraints>
                         <properties>
@@ -718,24 +706,15 @@
                           <text value="roomLabel"/>
                         </properties>
                       </component>
-                      <component id="d9af2" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <text value="Time:"/>
-                        </properties>
-                      </component>
                       <component id="6a34c" class="javax.swing.JComboBox" binding="comboBox6" default-binding="true">
                         <constraints>
-                          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="1.0" weighty="0.0"/>
                         </constraints>
                         <properties>
                           <model>
-                            <item value="08"/>
-                            <item value="09"/>
+                            <item value="8"/>
+                            <item value="9"/>
                             <item value="10"/>
                             <item value="11"/>
                             <item value="12"/>
@@ -754,39 +733,106 @@
                       </component>
                       <component id="8e657" class="javax.swing.JLabel">
                         <constraints>
-                          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="0.0" weighty="0.0"/>
                         </constraints>
                         <properties>
                           <text value="h"/>
                         </properties>
                       </component>
-                      <component id="96a1" class="javax.swing.JComboBox" binding="comboBox7" default-binding="true">
-                        <constraints>
-                          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <model>
-                            <item value="00"/>
-                            <item value="15"/>
-                            <item value="30"/>
-                            <item value="45"/>
-                          </model>
-                        </properties>
-                      </component>
                       <component id="47944" class="javax.swing.JLabel">
                         <constraints>
-                          <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="0.0" weighty="0.0"/>
                         </constraints>
                         <properties>
-                          <text value="min"/>
+                          <text value="h"/>
+                        </properties>
+                      </component>
+                      <component id="3c54d" class="javax.swing.JButton" binding="confrimEditButton" default-binding="true">
+                        <constraints>
+                          <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <gridbag weightx="1.0" weighty="0.0"/>
+                        </constraints>
+                        <properties>
+                          <text value="Confrim Edit"/>
+                        </properties>
+                      </component>
+                      <component id="d5" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <gridbag weightx="1.0" weighty="0.0"/>
+                        </constraints>
+                        <properties>
+                          <text value="Edit selected timeslot to time above:"/>
+                        </properties>
+                      </component>
+                      <component id="bdec" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <gridbag weightx="1.0" weighty="0.0"/>
+                        </constraints>
+                        <properties>
+                          <text value="Add new timeslot:"/>
+                        </properties>
+                      </component>
+                      <component id="d639f" class="javax.swing.JButton" binding="addButton2" default-binding="true">
+                        <constraints>
+                          <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <gridbag weightx="1.0" weighty="0.0"/>
+                        </constraints>
+                        <properties>
+                          <text value="Add"/>
+                        </properties>
+                      </component>
+                      <component id="b0d0" class="javax.swing.JButton" binding="deleteButton" default-binding="true">
+                        <constraints>
+                          <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <gridbag weightx="1.0" weighty="0.0"/>
+                        </constraints>
+                        <properties>
+                          <text value="Delete"/>
+                        </properties>
+                      </component>
+                      <component id="73b58" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <gridbag weightx="1.0" weighty="0.0"/>
+                        </constraints>
+                        <properties>
+                          <text value="Delete selected timeslot:"/>
+                        </properties>
+                      </component>
+                      <component id="31095" class="javax.swing.JButton" binding="checkConsistencyButton" default-binding="true">
+                        <constraints>
+                          <grid row="8" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <gridbag weightx="1.0" weighty="0.0"/>
+                        </constraints>
+                        <properties>
+                          <text value="Check consistency"/>
+                        </properties>
+                      </component>
+                      <component id="6710" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <gridbag weightx="1.0" weighty="0.0"/>
+                        </constraints>
+                        <properties>
+                          <text value="Check timetables consistancy:"/>
+                        </properties>
+                      </component>
+                      <component id="d9af2" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <gridbag weightx="1.0" weighty="0.0"/>
+                        </constraints>
+                        <properties>
+                          <text value="Time:"/>
                         </properties>
                       </component>
                       <component id="4450b" class="javax.swing.JLabel">
                         <constraints>
-                          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="0.0" weighty="0.0"/>
                         </constraints>
                         <properties>
@@ -795,22 +841,22 @@
                       </component>
                       <component id="36df" class="javax.swing.JLabel">
                         <constraints>
-                          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="0.0" weighty="0.0"/>
                         </constraints>
                         <properties>
-                          <text value="End"/>
+                          <text value="End:"/>
                         </properties>
                       </component>
-                      <component id="9037f" class="javax.swing.JComboBox" binding="comboBox8" default-binding="true">
+                      <component id="9c3bd" class="javax.swing.JComboBox" binding="comboBox9" default-binding="true">
                         <constraints>
-                          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="1.0" weighty="0.0"/>
                         </constraints>
                         <properties>
                           <model>
-                            <item value="08"/>
-                            <item value="09"/>
+                            <item value="8"/>
+                            <item value="9"/>
                             <item value="10"/>
                             <item value="11"/>
                             <item value="12"/>
@@ -824,111 +870,17 @@
                             <item value="20"/>
                             <item value="21"/>
                             <item value="22"/>
+                            <item value="23"/>
                           </model>
                         </properties>
                       </component>
-                      <component id="16b60" class="javax.swing.JLabel">
+                      <component id="41fe7" class="javax.swing.JButton" binding="changeRoomButton" default-binding="true">
                         <constraints>
-                          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="0.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <text value="h"/>
-                        </properties>
-                      </component>
-                      <component id="9c3bd" class="javax.swing.JComboBox" binding="comboBox9" default-binding="true">
-                        <constraints>
-                          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="1.0" weighty="0.0"/>
                         </constraints>
                         <properties>
-                          <model>
-                            <item value="00"/>
-                            <item value="15"/>
-                            <item value="30"/>
-                            <item value="45"/>
-                          </model>
-                        </properties>
-                      </component>
-                      <component id="dc23b" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="0.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <text value="min"/>
-                        </properties>
-                      </component>
-                      <component id="3c54d" class="javax.swing.JButton" binding="confrimEditButton" default-binding="true">
-                        <constraints>
-                          <grid row="6" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <text value="Confrim Edit"/>
-                        </properties>
-                      </component>
-                      <component id="d5" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <text value="Edit selected timeslot to time above:"/>
-                        </properties>
-                      </component>
-                      <component id="bdec" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <text value="Add new timeslot:"/>
-                        </properties>
-                      </component>
-                      <component id="d639f" class="javax.swing.JButton" binding="addButton2" default-binding="true">
-                        <constraints>
-                          <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <text value="Add"/>
-                        </properties>
-                      </component>
-                      <component id="b0d0" class="javax.swing.JButton" binding="deleteButton" default-binding="true">
-                        <constraints>
-                          <grid row="8" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <text value="Delete"/>
-                        </properties>
-                      </component>
-                      <component id="73b58" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <text value="Delete selected timeslot:"/>
-                        </properties>
-                      </component>
-                      <component id="31095" class="javax.swing.JButton" binding="checkConsistencyButton" default-binding="true">
-                        <constraints>
-                          <grid row="10" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <text value="Check consistency"/>
-                        </properties>
-                      </component>
-                      <component id="6710" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="10" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <text value="Check timetables consistancy:"/>
+                          <text value="Change room"/>
                         </properties>
                       </component>
                     </children>
