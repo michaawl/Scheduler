@@ -59,10 +59,54 @@ public class Application {
 
     }
 
+    static void editCSVFile(String filePath, int editLineInt, String editLineString) {
+
+        List<String> lines = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+
+            String line = "";
+
+            int lineInt = 0;
+
+            while ((line = reader.readLine()) != null) {
+
+                if (lineInt != editLineInt) {
+                    lines.add(line);
+                }
+                else {
+                    lines.add(editLineString);
+                }
+
+                lineInt++;
+            }
+
+        } catch (IOException e) {
+
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+
+
+            for (String stringLine : lines) {
+                writer.write(stringLine);
+                writer.newLine();
+            }
+
+            System.out.print(lines);
+            writer.flush();
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+
+    }
+
 
     public static void main(String[] args) {
 
-        //copy data from csv file to PersonArray
+        //copy data from users.csv file to PersonArray
         String filepath = "src/csv/users.csv";
         String line = "";
 
@@ -88,10 +132,9 @@ public class Application {
             }
         } catch (Exception e) {
             System.out.println(e);
-
         }
 
-        //copy data from csv file to CourseArray
+        //copy data from courses.csv file to CourseListArray
         filepath = "src/csv/courses.csv";
         line = "";
 
@@ -103,18 +146,18 @@ public class Application {
 
                 String[] data = line.split(",");
 
-                Course course = new Course();
+                String course = "";
 
-                course.setCourse(data[0]);
+                course = data[0];
 
-                Course.CourseArray.add(course);
+                Course.CourseListArray.add(course);
             }
         } catch (Exception e) {
             System.out.println(e);
 
         }
 
-        //copy data from csv file to RoomArray
+        //copy data from rooms.csv file to RoomArray
         filepath = "src/csv/rooms.csv";
         line = "";
 
@@ -136,6 +179,33 @@ public class Application {
                 System.out.println(e);
 
             }
+
+        //copy data from timetable.csv file to CourseArray
+        filepath = "src/csv/timetable.csv";
+        line = "";
+
+        try {
+
+            FileReader reader = new FileReader(filepath);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            while ((line = bufferedReader.readLine()) != null) {
+
+                String[] data = line.split(",");
+
+                Course course = new Course();
+
+                course.setCourse(data[0]);
+                course.setRoom(data[1]);
+                course.setDay(data[2]);
+                course.setStartTime(Integer.parseInt(data[3]));
+                course.setEndTime(Integer.parseInt(data[4]));
+
+                Course.CourseArray.add(course);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
 
             //LoginGUI logingui = new LoginGUI();

@@ -38,7 +38,6 @@ public class AdminGUI extends JFrame{
     private JComboBox comboBox6;
     private JComboBox comboBox9;
     private JButton confrimEditButton;
-    private JButton addButton2;
     private JButton deleteButton;
     private JButton checkConsistencyButton;
     private JPanel panel1;
@@ -58,12 +57,12 @@ public class AdminGUI extends JFrame{
     private JScrollPane scrollPane3;
     private JScrollPane scrollPane4;
     private JScrollPane scrollPane5;
-    private JPanel scrollPane6;
-    private JScrollPane scrollPane7;
     private JLabel h;
+    private JScrollPane scrollPane6;
 
     static DefaultListModel<String> courseListModel = new DefaultListModel<>();
     static DefaultListModel<String> roomListModel = new DefaultListModel<>();
+    static DefaultListModel<String> timetableListModel = new DefaultListModel<>();
 
     public AdminGUI(){
 
@@ -132,24 +131,7 @@ public class AdminGUI extends JFrame{
                 course.setEndTime(end);
                 course.setDay(day);
 
-            }
-        });
-
-        ccVC.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        ccVC.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        ccVR.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                Course.CourseArray.add(course);
 
             }
         });
@@ -169,8 +151,8 @@ public class AdminGUI extends JFrame{
                 courseListModel.clear();
                 roomListModel.clear();
 
-                for(Course course: Course.CourseArray){
-                    courseListModel.addElement(course.getCourse());
+                for(String course: Course.CourseListArray){
+                    courseListModel.addElement(course);
                 }
 
                 for(Room room : Room.RoomArray){
@@ -185,16 +167,19 @@ public class AdminGUI extends JFrame{
          */
 
         JList eCourseList = new JList<>();
-        JList eCourseList2 = new JList<>();
+        JList eTimetableList = new JList<>();
         JList eRoomList = new JList();
+        JList eRoomList2 = new JList();
 
         eCourseList.setModel(courseListModel);
-        eCourseList2.setModel(courseListModel);
+        eTimetableList.setModel(timetableListModel);
         eRoomList.setModel(roomListModel);
+        eRoomList2.setModel(roomListModel);
 
         scrollPane3.setViewportView(eCourseList);
         scrollPane4.setViewportView(eRoomList);
-        scrollPane5.setViewportView(eCourseList2);
+        scrollPane5.setViewportView(eTimetableList);
+        scrollPane6.setViewportView(eRoomList2);
 
         mainEditor.addActionListener(new ActionListener() {
             @Override
@@ -203,13 +188,24 @@ public class AdminGUI extends JFrame{
 
                 courseListModel.clear();
                 roomListModel.clear();
+                timetableListModel.clear();
 
-                for(Course course: Course.CourseArray){
-                    courseListModel.addElement(course.getCourse());
+                for(String course: Course.CourseListArray){
+                    courseListModel.addElement(course);
                 }
 
                 for(Room room : Room.RoomArray){
                     roomListModel.addElement(room.getRoom());
+                }
+
+                for(Course course : Course.CourseArray){
+
+                    String courseInfo = "";
+                    courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
+                    ". Date: " + course.getDay() + ", " +course.getStartTime() + "-" + course.getEndTime()+
+                    " o'clock";
+
+                    timetableListModel.addElement(courseInfo);
                 }
             }
         });
@@ -225,14 +221,12 @@ public class AdminGUI extends JFrame{
 
                     Application.writeToCSVFile(addCourseString, "src/csv/courses.csv");
 
-                    Course newCourse = new Course();
-                    newCourse.setCourse(addCourseString);
-                    Course.CourseArray.add(newCourse);
+                    Course.CourseListArray.add(addCourseString);
 
                     courseListModel.clear();
 
-                    for(Course course: Course.CourseArray){
-                        courseListModel.addElement(course.getCourse());
+                    for(String course: Course.CourseListArray){
+                        courseListModel.addElement(course);
                     }
                 }
             }
@@ -246,11 +240,11 @@ public class AdminGUI extends JFrame{
                 System.out.println(deleteLine);
 
                 Application.deleteFromCSVFile("src/csv/courses.csv",deleteLine);
-                Course.CourseArray.remove(deleteLine);
+                Course.CourseListArray.remove(deleteLine);
 
                 courseListModel.clear();
-                for(Course course: Course.CourseArray){
-                    courseListModel.addElement(course.getCourse());
+                for(String course: Course.CourseListArray){
+                    courseListModel.addElement(course);
                 }
 
 
@@ -300,6 +294,118 @@ public class AdminGUI extends JFrame{
             }
         });
 
+        /*
+        ################### EDIT COURSES ###################
+         */
+
+        changeRoomButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String editLine = "";
+                String editRoom = eRoomList2.getSelectedValue().toString();
+                int editIndex = eTimetableList.getSelectedIndex();
+
+                Course editCourse = Course.CourseArray.get(editIndex);
+
+                Course.CourseArray.get(editIndex).setRoom(editRoom);
+
+                editLine = editCourse.getCourse() + "," + editRoom + "," +
+                        editCourse.getDay() + "," + editCourse.getStartTime() + "," +
+                        editCourse.getEndTime();
+
+                Application.editCSVFile("src/csv/timetable.csv", editIndex, editLine);
+
+                System.out.println(editLine);
+
+                timetableListModel.clear();
+
+                for(Course course : Course.CourseArray){
+
+                    String courseInfo = "";
+                    courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
+                            ". Date: " + course.getDay() + ", " +course.getStartTime() + "-" + course.getEndTime()+
+                            " o'clock";
+
+                    timetableListModel.addElement(courseInfo);
+                }
+            }
+        });
+
+        confrimEditButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String editLine = "";
+                int  newStart = Integer.parseInt(comboBox6.getSelectedItem().toString());
+                int newEnd = Integer.parseInt(comboBox9.getSelectedItem().toString());
+                int editIndex = eTimetableList.getSelectedIndex();
+
+                Course editCourse = Course.CourseArray.get(editIndex);
+
+                Course.CourseArray.get(editIndex).setStartTime(newStart);
+                Course.CourseArray.get(editIndex).setEndTime(newEnd);
+
+                editLine = editCourse.getCourse() + "," + editCourse.getRoom() + "," +
+                        editCourse.getDay() + "," + newStart + "," +
+                        newEnd;
+
+                Application.editCSVFile("src/csv/timetable.csv", editIndex, editLine);
+
+                System.out.println(editLine);
+
+                timetableListModel.clear();
+
+                for(Course course : Course.CourseArray){
+
+                    String courseInfo = "";
+                    courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
+                            ". Date: " + course.getDay() + ", " +course.getStartTime() + "-" + course.getEndTime()+
+                            " o'clock";
+
+                    timetableListModel.addElement(courseInfo);
+                }
+
+            }
+        });
+
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int deleteLine = eTimetableList.getSelectedIndex();
+
+                Application.deleteFromCSVFile("src/csv/timetable.csv",deleteLine);
+                Course.CourseArray.remove(deleteLine);
+
+                timetableListModel.clear();
+
+                for(Course course : Course.CourseArray){
+
+                    String courseInfo = "";
+                    courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
+                            ". Date: " + course.getDay() + ", " +course.getStartTime() + "-" + course.getEndTime()+
+                            " o'clock";
+
+                    timetableListModel.addElement(courseInfo);
+                }
+
+            }
+        });
+
+        checkConsistencyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        backButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelMain, "panel2");
+            }
+        });
 
         /*
         ################### EDITOR ###################
@@ -326,12 +432,6 @@ public class AdminGUI extends JFrame{
             }
         });
         backButton2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelMain, "panel2");
-            }
-        });
-        backButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelMain, "panel2");

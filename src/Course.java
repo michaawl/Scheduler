@@ -17,7 +17,9 @@ public class Course {
         this.day = day;
     }
 
+    static CopyOnWriteArrayList<String> CourseListArray = new CopyOnWriteArrayList<>();
     static CopyOnWriteArrayList<Course> CourseArray = new CopyOnWriteArrayList<>();
+
 
     public String getRoom() {
         return room;
