@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="delete line works">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="Room/Course Editor works">
       <change beforePath="$PROJECT_DIR$/src/AdminGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminGUI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AdminGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/csv/courses.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/courses.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/csv/timetable.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/timetable.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685190172142</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Room/Course Editor works">
+      <created>1685216979181</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1685216979181</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,6 +195,7 @@
     <MESSAGE value="Complete GUI done" />
     <MESSAGE value="buttons on admin thing work" />
     <MESSAGE value="delete line works" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete line works" />
+    <MESSAGE value="Room/Course Editor works" />
+    <option name="LAST_COMMIT_MESSAGE" value="Room/Course Editor works" />
   </component>
 </project>

@@ -60,6 +60,7 @@ public class AdminGUI extends JFrame{
     private JScrollPane scrollPane5;
     private JPanel scrollPane6;
     private JScrollPane scrollPane7;
+    private JLabel h;
 
     static DefaultListModel<String> courseListModel = new DefaultListModel<>();
     static DefaultListModel<String> roomListModel = new DefaultListModel<>();
