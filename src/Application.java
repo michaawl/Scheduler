@@ -1,5 +1,7 @@
 import javax.imageio.IIOException;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Application {
 
@@ -16,16 +18,44 @@ public class Application {
         }
     }
 
-    static void deleteFromCSVFile(String filepath){
+    static void deleteFromCSVFile(String filePath, int deleteLine){
 
-        try{
+        List<String> lines = new ArrayList<>();
 
-            BufferedReader reader = new BufferedReader(new FileReader(filepath));
-            FileWriter csvWriter = new FileWriter(filepath);
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 
-        }catch (IOException e){
+            String line = "";
+
+            int lineInt = 0;
+
+            while ((line = reader.readLine()) != null) {
+
+                if(lineInt != deleteLine) {
+                    lines.add(line);
+                }
+
+                lineInt++;
+            }
+
+        } catch (IOException e) {
 
         }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))){
+
+
+            for (String stringLine : lines) {
+                writer.write(stringLine);
+                writer.newLine();
+            }
+
+            System.out.print(lines);
+            writer.flush();
+
+        }catch (IOException e){
+            System.out.println(e);
+        }
+
 
     }
 
@@ -37,8 +67,9 @@ public class Application {
 
         try {
 
-            BufferedReader reader = new BufferedReader(new FileReader(filepath));
-            while ((line = reader.readLine()) != null) {
+            FileReader reader = new FileReader(filepath);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            while ((line = bufferedReader.readLine()) != null) {
 
                 String[] data = line.split(",");
 
@@ -53,9 +84,6 @@ public class Application {
 
                 Person.PersonArray.add(person);
 
-                System.out.println();
-
-
             }
 
         } catch ( Exception e){
@@ -64,8 +92,9 @@ public class Application {
         }
 
         //LoginGUI logingui = new LoginGUI();
-        //AdminGUI adminGUI = new AdminGUI();
-        RegisterGUI registerGUI = new RegisterGUI();
+        AdminGUI adminGUI = new AdminGUI();
+
+        //RegisterGUI registerGUI = new RegisterGUI();
 
 
     }

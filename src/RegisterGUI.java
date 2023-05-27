@@ -138,7 +138,6 @@ public class RegisterGUI extends JFrame {
 
                 String listString = "";
 
-                listString = pers.getUserID() + ". ";
                 listString += pers.getUsername() + " (";
 
                 if (pers.isAdminStatus()) {
@@ -180,8 +179,23 @@ public class RegisterGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String selectedItem = list1.getSelectedValue().toString();
-                progressLabel.setText(selectedItem);
+                try{
+                    String selectedItem = list1.getSelectedValue().toString();
+                    progressLabel.setText(selectedItem);
+                }
+                catch (NullPointerException e1){
+
+                }
+
+                int deleteLine = list1.getSelectedIndex();
+                System.out.println(deleteLine);
+
+                Application.deleteFromCSVFile("src/csv/users.csv",deleteLine);
+                Person.PersonArray.remove(deleteLine);
+
+
+                System.out.println("test");
+                refreshList();
 
 
             }
@@ -197,7 +211,6 @@ public class RegisterGUI extends JFrame {
 
             String listString = "";
 
-            listString = pers.getUserID() + ". ";
             listString += pers.getUsername() + " (";
 
             if (pers.isAdminStatus()) {
@@ -221,7 +234,6 @@ public class RegisterGUI extends JFrame {
         }
 
     }
-
 
     private void createUIComponents() {
         // TODO: place custom component creation code here

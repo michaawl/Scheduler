@@ -16,20 +16,11 @@ public class Person {
     private boolean studentStatus;
     private String username;
     private String email;
-    private int userID;
     private String password;
 
     static CopyOnWriteArrayList<Person> PersonArray = new CopyOnWriteArrayList<>();
 
     static int userCount = 0;
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
 
     public Person() {
         userCount++;
@@ -39,7 +30,6 @@ public class Person {
         this.assistantStatus = false;
         this.studentStatus = false;
 
-        this.userID = userCount;
     }
 
     public String getPassword() {

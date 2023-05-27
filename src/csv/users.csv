@@ -1,4 +1,6 @@
 admin,email@admin.at,admin,true,false,false
 assistant,email@assistant.de,assistant,false,true,false
 student,email@student.ch,student,false,false,true
-aa,aa,aa,true,false,false
+dd,asdas,asd,true,false,false
+ddd,asdasdd,asd,true,false,false
+dddddd,asdasdddd,asd,false,false,true
