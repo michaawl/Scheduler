@@ -209,9 +209,9 @@ public class Application {
 
 
             //LoginGUI logingui = new LoginGUI();
-            AdminGUI adminGUI = new AdminGUI();
-
+            //AdminGUI adminGUI = new AdminGUI();
             //RegisterGUI registerGUI = new RegisterGUI();
+        StudentGUI studentGUI = new StudentGUI();
 
 
         }
