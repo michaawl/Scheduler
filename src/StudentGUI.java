@@ -34,13 +34,14 @@ public class StudentGUI extends JFrame {
     static DefaultListModel<String> selectedListModel = new DefaultListModel<>();
     static DefaultTableModel tableModel = new DefaultTableModel();
 
-    public int addDelCourse(String filepath, Person user, String addDelCourse, boolean addTrue) {
+    static int addDelCourse(String filepath, Person user, String addDelCourse, boolean addTrue) {
 
         //check if student is in list
 
         String line = "";
         String editString = "";
         int lineInt = 0;
+        CopyOnWriteArrayList<String> updateList = user.getStudentCourseList();
 
         try {
 
@@ -85,7 +86,7 @@ public class StudentGUI extends JFrame {
 
 
 
-                    CopyOnWriteArrayList<String> updateList = user.getStudentCourseList();
+
 
                     if(addTrue){
 
@@ -116,8 +117,12 @@ public class StudentGUI extends JFrame {
 
         }
 
+
         editString = user.getUsername() + "," + addDelCourse;
         Application.writeToCSVFile(editString, "src/csv/students.csv");
+
+        updateList.add(addDelCourse);
+        user.setStudentCourseList(updateList);
 
         System.out.println("Added student to student.csv list.");
 
@@ -185,11 +190,11 @@ public class StudentGUI extends JFrame {
 
                     selectedListModel.clear();
 
-                    if (!user.getStudentCourseList().isEmpty()) {
-                        for (String course : user.getStudentCourseList()) {
-                            selectedListModel.addElement(course);
-                        }
+
+                    for (String course : user.getStudentCourseList()) {
+                        selectedListModel.addElement(course);
                     }
+
 
                 } else{
                     System.out.println("Already booked other courses at that time!");

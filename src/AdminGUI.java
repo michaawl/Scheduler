@@ -7,7 +7,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class AdminGUI extends JFrame{
     private JPanel panelMain;
@@ -33,8 +32,6 @@ public class AdminGUI extends JFrame{
     private JButton deleteSelectedRoomButton;
     private JButton backButton2;
     private JButton addRemoveStudentsFromButton;
-    private JList list5;
-    private JList list6;
     private JButton addStudentToAButton;
     private JButton removeStudentFromSelectedButton;
     private JButton backButton4;
@@ -64,10 +61,19 @@ public class AdminGUI extends JFrame{
     private JScrollPane scrollPane5;
     private JLabel h;
     private JScrollPane scrollPane6;
+    private JButton selectStudentButton;
+    private JLabel slctdLbl;
+    private JScrollPane scrollPaneS1;
+    private JScrollPane scrollPaneS2;
+    private JScrollPane scrollPaneS3;
+    private JLabel studentMsg;
 
     static DefaultListModel<String> courseListModel = new DefaultListModel<>();
     static DefaultListModel<String> roomListModel = new DefaultListModel<>();
     static DefaultListModel<String> timetableListModel = new DefaultListModel<>();
+
+    static DefaultListModel<String> studentListModel = new DefaultListModel<>();
+    static DefaultListModel<String> selectedCourseListModel = new DefaultListModel<>();
 
     public AdminGUI(Person user){
 
@@ -476,7 +482,163 @@ public class AdminGUI extends JFrame{
         });
 
         /*
-        ################### EDITOR ###################
+        ################### STUDENT EDITOR ###################
+         */
+
+        JList studentList = new JList();
+        JList selectedCourseList = new JList();
+        JList courseList = new JList();
+
+        studentList.setModel(studentListModel);
+        selectedCourseList.setModel(selectedCourseListModel);
+        courseList.setModel(courseListModel);
+
+        scrollPaneS1.setViewportView(studentList);
+        scrollPaneS2.setViewportView(selectedCourseList);
+        scrollPaneS3.setViewportView(courseList);
+
+        addRemoveStudentsFromButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelMain, "panel4");
+
+                studentListModel.clear();
+                selectedCourseListModel.clear();
+                courseListModel.clear();
+
+                for(String course: Course.CourseListArray){
+                    courseListModel.addElement(course);
+                }
+
+                for(Person person : Person.PersonArray){
+                    if(person.isStudentStatus()){
+                        studentListModel.addElement(person.getUsername());
+                    }
+                }
+            }
+        });
+
+        addStudentToAButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                System.out.println("hi");
+
+                try {
+                    String username = studentList.getSelectedValue().toString();
+                    String courseName = courseList.getSelectedValue().toString();
+
+                    if(slctdLbl.getText().equals("none")){
+                        studentMsg.setText("Select Student");
+
+                    } else {
+                        for(Person student : Person.PersonArray){
+
+                            if(student.getUsername().equals(username)){
+
+                                if(StudentGUI.checkConsistancy(student, courseName)) {
+
+                                    StudentGUI.addDelCourse("src/csv/students.csv", student, courseName, true); //true add, false remove
+
+
+                                    selectedCourseListModel.clear();
+
+                                    for (String course : student.getStudentCourseList()) {
+                                        selectedCourseListModel.addElement(course);
+                                    }
+
+                                }else {
+                                    System.out.println("Already booked other courses at that time!");
+                                }
+
+                                break;
+                            }
+
+                        }
+                    }
+
+                } catch (Exception e5){
+                    studentMsg.setText("Select student and course.");
+                    e5.printStackTrace();
+                }
+
+
+            }
+        });
+
+        selectStudentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String username = studentList.getSelectedValue().toString();
+
+
+                selectedCourseListModel.clear();
+
+                for(Person student : Person.PersonArray){
+                    if(student.getUsername().equals(username)){
+                        Person user = student;
+                        slctdLbl.setText(username);
+
+                        for (String course : user.getStudentCourseList()) {
+                            selectedCourseListModel.addElement(course);
+                        }
+                    }
+                }
+
+            }
+        });
+
+        backButton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelMain, "panel2");
+            }
+        });
+
+        removeStudentFromSelectedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                try {
+                    String username = studentList.getSelectedValue().toString();
+                    String removeCourse = selectedCourseList.getSelectedValue().toString();
+
+                    if(username.equals("none")){
+                        studentMsg.setText("Select Student");
+
+                    } else {
+
+                        for(Person student : Person.PersonArray){
+
+                            if(student.getUsername().equals(username)){
+
+                                StudentGUI.addDelCourse("src/csv/students.csv", student, removeCourse, false); //true add, false remove
+
+                                selectedCourseListModel.clear();
+
+                                for (String course : student.getStudentCourseList()) {
+                                    selectedCourseListModel.addElement(course);
+                                }
+
+                                break;
+                            }
+                        }
+
+                    }
+
+                } catch (Exception e5){
+                    studentMsg.setText("No Student selected");
+                }
+
+
+            }
+
+        });
+
+
+         /*
+        ################### END ###################
          */
 
 
@@ -506,18 +668,6 @@ public class AdminGUI extends JFrame{
             }
         });
 
-        addRemoveStudentsFromButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelMain, "panel4");
-            }
-        });
-        backButton4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelMain, "panel2");
-            }
-        });
         registerAndEditUsersButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
