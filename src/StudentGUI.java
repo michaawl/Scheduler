@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -31,6 +32,7 @@ public class StudentGUI extends JFrame {
     private JLabel usrnmLbl2;
     static DefaultListModel<String> courseListModel = new DefaultListModel<>();
     static DefaultListModel<String> selectedListModel = new DefaultListModel<>();
+    static DefaultTableModel tableModel = new DefaultTableModel();
 
     public int addDelCourse(String filepath, Person user, String addDelCourse, boolean addTrue) {
 
@@ -142,7 +144,7 @@ public class StudentGUI extends JFrame {
                 new String[]{" ", "Monday", "Tuesday", "Wednesay", "Thursday", "Friday"}
         ));
 
-        DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
+        tableModel = (DefaultTableModel) table1.getModel();
 
         for (int i = 8; i < 24; i++) {
             tableModel.setValueAt(i + ":00", i - 8, 0);
@@ -255,6 +257,23 @@ public class StudentGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(panelMain, "panelTimetable");
 
+                for(String studentCourseString : user.getStudentCourseList()){
+
+                    for(Course course : Course.CourseArray){
+
+                        if(course.getCourse().equals(studentCourseString)){
+
+                            int startTime = course.getStartTime();
+                            int endTime = course.getEndTime();
+                            String day = course.getDay();
+                            String room = course.getRoom();
+
+                            setValueToTimetable(startTime, endTime, day, room, studentCourseString);
+
+                        }
+                    }
+
+                }
             }
         });
         mainMenuButton1.addActionListener(new ActionListener() {
@@ -274,6 +293,48 @@ public class StudentGUI extends JFrame {
                 LoginGUI loginGUI = new LoginGUI();
             }
         });
+
+    }
+
+    static public void setValueToTimetable(int start, int end, String day, String room, String course){
+
+        int row = 0;
+        int column = 0;
+        String tableString = course + " (Room: " + room + ")";
+
+        switch (day) {
+            case "Monday":
+                column = 1;
+
+                break;
+            case "Tuesday":
+                column = 2;
+                break;
+            case "Wednesday":
+                column = 3;
+
+                break;
+            case "Thursday":
+                column = 4;
+
+                break;
+            case "Friday":
+                column = 5;
+
+                break;
+            default:
+                System.out.println("Invalid day.");
+                break;
+
+        }
+
+        row = start - 8;
+
+        while(row<(end-8)){
+            tableModel.setValueAt(tableString,row,column);
+            row++;
+        }
+
 
     }
 
