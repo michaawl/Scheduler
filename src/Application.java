@@ -1,7 +1,7 @@
 import javax.imageio.IIOException;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Application {
 
@@ -103,6 +103,52 @@ public class Application {
 
     }
 
+    public static void addStudentSet(String filepath, Person student){
+
+
+        String line = "";
+        String editString = "";
+        CopyOnWriteArrayList<String> studentList = new CopyOnWriteArrayList<>();
+
+        try {
+
+            FileReader reader = new FileReader(filepath);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            while ((line = bufferedReader.readLine()) != null) {
+
+                String[] data = line.split(",");
+
+                StringTokenizer tokenizer = new StringTokenizer(line, ",");
+
+                if(data[0].equals(student.getUsername())){
+                    //skip first element
+                    if (tokenizer.hasMoreTokens()) {
+                        editString = tokenizer.nextToken();
+                    }
+
+                    //element 2 until end
+                    while (tokenizer.hasMoreTokens()) {
+                        String bookedCourses = tokenizer.nextToken();
+
+                        studentList.add(bookedCourses);
+
+                    }
+
+                    if(!studentList.isEmpty()){
+                        student.setStudentCourseList(studentList);
+                    }
+
+                   return;
+                }
+
+            }
+        }catch(Exception e){
+            System.out.println(e);
+
+        }
+    }
+
+
 
     public static void main(String[] args) {
 
@@ -126,6 +172,10 @@ public class Application {
                 person.setAdminStatus(Boolean.parseBoolean(data[3]));
                 person.setAssistantStatus(Boolean.parseBoolean(data[4]));
                 person.setStudentStatus(Boolean.parseBoolean(data[5]));
+
+                if(person.isStudentStatus()){
+                    addStudentSet("src/csv/students.csv", person);
+                }
 
                 Person.PersonArray.add(person);
 

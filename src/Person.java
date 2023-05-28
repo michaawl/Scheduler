@@ -20,16 +20,15 @@ public class Person {
 
     static CopyOnWriteArrayList<Person> PersonArray = new CopyOnWriteArrayList<>();
 
-    public Set<String> getStudentSet() {
-        return studentSet;
+    public CopyOnWriteArrayList<String> getStudentCourseList() {
+        return studentCourseList;
     }
 
-    public void setStudentSet(Set<String> studentSet) {
-        this.studentSet = studentSet;
+    public void setStudentCourseList(CopyOnWriteArrayList<String> studentCourseList) {
+        this.studentCourseList = studentCourseList;
     }
 
-    //static Map<String, Set<String>> courseMap = new HashMap<>();
-    private Set <String> studentSet = new HashSet<>();
+    private CopyOnWriteArrayList<String> studentCourseList = new CopyOnWriteArrayList<>();
 
     static int userCount = 0;
 

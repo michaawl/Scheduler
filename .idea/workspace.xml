@@ -4,18 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="Room/Course Editor works">
+    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="Student can book course">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AssistantGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AssistantGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LoginGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RegisterGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RegisterGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StudentGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudentGUI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StudentGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudentGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/csv/students.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/students.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/csv/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/users.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,29 +38,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;101&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;268&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/micha/IdeaProjects/Schedule&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "101",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "294",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/micha/IdeaProjects/Schedule",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\micha\IdeaProjects\Schedule" />
@@ -181,7 +175,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685216979181</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Student can book course">
+      <created>1685278515119</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1685278515119</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,6 +206,18 @@
     <MESSAGE value="buttons on admin thing work" />
     <MESSAGE value="delete line works" />
     <MESSAGE value="Room/Course Editor works" />
-    <option name="LAST_COMMIT_MESSAGE" value="Room/Course Editor works" />
+    <MESSAGE value="Student can book course" />
+    <option name="LAST_COMMIT_MESSAGE" value="Student can book course" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/StudentGUI.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
