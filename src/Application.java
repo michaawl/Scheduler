@@ -18,6 +18,55 @@ public class Application {
         }
     }
 
+    static void deleteFromCSVFileByFirstEntry(String filepath, String deleteLine) {
+
+
+        String line = "";
+        String delete = "";
+        int lineInt = 0;
+        List<String> lines = new ArrayList<>();
+
+        try {
+
+            FileReader reader = new FileReader(filepath);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            while ((line = bufferedReader.readLine()) != null) {
+
+                String[] data = line.split(",");
+
+                StringTokenizer tokenizer = new StringTokenizer(line, ",");
+
+                if (!(data[0].equals(deleteLine))) {
+
+                    lines.add(line);
+
+                }
+
+                lineInt++;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
+
+
+            for (String stringLine : lines) {
+                writer.write(stringLine);
+                writer.newLine();
+            }
+
+            System.out.print(lines);
+            writer.flush();
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+
+    }
+
     static void deleteFromCSVFile(String filePath, int deleteLine) {
 
         List<String> lines = new ArrayList<>();
@@ -259,10 +308,9 @@ public class Application {
 
 
             //LoginGUI logingui = new LoginGUI();
-            //AdminGUI adminGUI = new AdminGUI();
+            AdminGUI adminGUI = new AdminGUI(Person.PersonArray.get(0));
             //RegisterGUI registerGUI = new RegisterGUI();
-            StudentGUI studentGUI = new StudentGUI(Person.PersonArray.get(2));
-
+            //StudentGUI studentGUI = new StudentGUI(Person.PersonArray.get(2));
 
         }
 

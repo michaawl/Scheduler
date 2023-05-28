@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="timetable works">
+    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="student consistancy check works">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StudentGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudentGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/csv/students.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/students.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csv/courses.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/courses.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csv/rooms.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/rooms.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csv/timetable.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/timetable.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685287992028</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="student consistancy check works">
+      <created>1685300452189</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1685300452189</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,25 +231,21 @@
     <MESSAGE value="Student can book course" />
     <MESSAGE value="booking course and deleting booked booking course works" />
     <MESSAGE value="timetable works" />
-    <option name="LAST_COMMIT_MESSAGE" value="timetable works" />
+    <MESSAGE value="student consistancy check works" />
+    <option name="LAST_COMMIT_MESSAGE" value="student consistancy check works" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/StudentGUI.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/StudentGUI.java</url>
-          <line>181</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/StudentGUI.java</url>
           <line>318</line>
           <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/AdminGUI.java</url>
+          <line>333</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

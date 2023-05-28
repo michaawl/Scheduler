@@ -3,6 +3,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class AdminGUI extends JFrame{
     private JPanel panelMain;
@@ -114,7 +119,13 @@ public class AdminGUI extends JFrame{
                 int start = Integer.parseInt(comboBox2.getSelectedItem().toString());
                 int end = Integer.parseInt(comboBox3.getSelectedItem().toString());
                 String courseStrg = ccCourseList.getSelectedValue().toString();
-                String room = ccRoomList.getSelectedValue().toString();
+                String room = "";
+
+                try{
+                     room = ccRoomList.getSelectedValue().toString();
+                }catch (Exception e4){
+                     room = "noroom";
+                }
                 String day = comboBox1.getSelectedItem().toString();
 
                 msgLbl.setText("Created course: " + courseStrg + " in room " +
@@ -132,6 +143,7 @@ public class AdminGUI extends JFrame{
                 course.setDay(day);
 
                 Course.CourseArray.add(course);
+
 
             }
         });
@@ -237,18 +249,41 @@ public class AdminGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
                 int deleteLine = eCourseList.getSelectedIndex();
+                String selectedCourse = eCourseList.getSelectedValue().toString();
                 System.out.println(deleteLine);
 
-                Application.deleteFromCSVFile("src/csv/courses.csv",deleteLine);
+                Application.deleteFromCSVFile("src/csv/courses.csv", deleteLine);
                 Course.CourseListArray.remove(deleteLine);
 
                 courseListModel.clear();
-                for(String course: Course.CourseListArray){
+                for (String course : Course.CourseListArray) {
                     courseListModel.addElement(course);
                 }
 
 
+
+                    for (Course courseElement : Course.CourseArray) {
+
+                        if (selectedCourse.equals(courseElement.getCourse())) {
+                            Application.deleteFromCSVFileByFirstEntry("src/csv/timetable.csv", selectedCourse);
+                            Course.CourseArray.remove(courseElement);
+                        }
+                    }
+
+                timetableListModel.clear();
+
+                for(Course course : Course.CourseArray){
+
+                    String courseInfo = "";
+                    courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
+                            ". Date: " + course.getDay() + ", " +course.getStartTime() + "-" + course.getEndTime()+
+                            " o'clock";
+
+                    timetableListModel.addElement(courseInfo);
+                }
+
             }
+
         });
 
         //####### Edit Room #######
@@ -281,14 +316,47 @@ public class AdminGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
                 int deleteLine = eRoomList.getSelectedIndex();
-                System.out.println(deleteLine);
+                String roomString = eRoomList.getSelectedValue().toString();
 
-                Application.deleteFromCSVFile("src/csv/rooms.csv",deleteLine);
-                Room.RoomArray.remove(deleteLine);
+                if(deleteLine==0){
 
-                roomListModel.clear();
-                for(Room room : Room.RoomArray){
-                    roomListModel.addElement(room.getRoom());
+                    System.out.println("noroom cannot be deleted.");
+
+                }
+                else {
+
+
+                    System.out.println(deleteLine);
+
+                    Application.deleteFromCSVFile("src/csv/rooms.csv",deleteLine);
+                    Room.RoomArray.remove(deleteLine);
+
+                    removeRoomfromCourse("src/csv/timetable.csv", roomString);
+
+                    for (Course courseElement : Course.CourseArray) {
+
+                        if (courseElement.getRoom().equals(roomString)) {
+                            courseElement.setRoom("noroom");
+                        }
+                    }
+
+                    roomListModel.clear();
+                    for(Room room : Room.RoomArray){
+                        roomListModel.addElement(room.getRoom());
+                    }
+
+                    timetableListModel.clear();
+
+                    for(Course course : Course.CourseArray){
+
+                        String courseInfo = "";
+                        courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
+                                ". Date: " + course.getDay() + ", " +course.getStartTime() + "-" + course.getEndTime()+
+                                " o'clock";
+
+                        timetableListModel.addElement(courseInfo);
+                    }
+
                 }
 
             }
@@ -459,6 +527,77 @@ public class AdminGUI extends JFrame{
                 RegisterGUI startFrame = new RegisterGUI(user);
             }
         });
+
+    }
+
+    static void removeRoomfromCourse(String filePath, String room) {
+
+        List<String> lines = new ArrayList<>();
+        String editString = "";
+        boolean edited = false;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+
+            String line = "";
+
+            int lineInt = 0;
+
+            while ((line = reader.readLine()) != null) {
+
+                String[] data = line.split(",");
+
+                StringTokenizer tokenizer = new StringTokenizer(line, ",");
+                edited = false;
+
+                if (tokenizer.hasMoreTokens()) {
+
+                    editString = tokenizer.nextToken();
+
+                    if(tokenizer.hasMoreTokens() && data[1].equals(room)){
+
+                        String nextString = tokenizer.nextToken();
+                        editString = editString + ",noroom";
+
+                        while (tokenizer.hasMoreTokens()) {
+
+                                nextString = tokenizer.nextToken();
+                                editString = editString + "," + nextString;
+
+                            }
+
+                        lines.add(editString);
+                        edited = true;
+
+                        }
+
+                    }
+
+                if(edited==false){
+                    lines.add(line);
+                }
+
+                lineInt++;
+            }
+
+        } catch (IOException e) {
+
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+
+
+            for (String stringLine : lines) {
+                writer.write(stringLine);
+                writer.newLine();
+            }
+
+            System.out.print(lines);
+            writer.flush();
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
 
     }
 
