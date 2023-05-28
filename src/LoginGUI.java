@@ -63,7 +63,19 @@ public class LoginGUI extends JFrame{
                             getContentPane().remove(loginPanel);
                             dispose(); //release any resources associated with it and close the window
 
-                            AdminGUI adminGUI = new AdminGUI();
+
+                            if(p.isAdminStatus()){
+                                AdminGUI adminGUI = new AdminGUI(p);
+                            }
+
+                            if(p.isAssistantStatus()){
+                                AssistantGUI assistantGUI = new AssistantGUI(p);
+                            }
+
+                            if(p.isStudentStatus()){
+                                StudentGUI studentGUI = new StudentGUI(p);
+                            }
+
 
                         }
 

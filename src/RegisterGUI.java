@@ -39,7 +39,7 @@ public class RegisterGUI extends JFrame {
     static DefaultListModel<String> listModel = new DefaultListModel<>();
 
 
-    public RegisterGUI() {
+    public RegisterGUI(Person user) {
 
         setTitle("Register a user");
         setContentPane(mainPanel);
@@ -172,7 +172,7 @@ public class RegisterGUI extends JFrame {
                 getContentPane().remove(mainPanel);
                 dispose(); //release any resources associated with it and close the window
 
-                AdminGUI adminGUI = new AdminGUI();
+                AdminGUI adminGUI = new AdminGUI(user);
             }
         });
         deleteButton.addActionListener(new ActionListener() {

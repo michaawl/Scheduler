@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="last of sat">
+    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="Room/Course Editor works">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AssistantGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AssistantGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LoginGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RegisterGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RegisterGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StudentGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudentGUI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StudentGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudentGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csv/students.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/students.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csv/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/users.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +52,7 @@
     &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;true&quot;,
     &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;101&quot;,
     &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;386&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;268&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/micha/IdeaProjects/Schedule&quot;,
@@ -116,9 +124,6 @@
       <workItem from="1685100811447" duration="3903000" />
       <workItem from="1685189381721" duration="4876000" />
       <workItem from="1685198326843" duration="3154000" />
-      <workItem from="1685225013541" duration="27000" />
-      <workItem from="1685228846058" duration="3666000" />
-      <workItem from="1685232963118" duration="1924000" />
     </task>
     <task id="LOCAL-00001" summary="csv files erstellt">
       <created>1683925797406</created>
@@ -169,21 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685190172142</updated>
     </task>
-    <task id="LOCAL-00008" summary="edit works besides consistancy">
-      <created>1685224996439</created>
+    <task id="LOCAL-00008" summary="Room/Course Editor works">
+      <created>1685216979181</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1685224996439</updated>
+      <updated>1685216979181</updated>
     </task>
-    <task id="LOCAL-00009" summary="last of sat">
-      <created>1685232508638</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1685232508638</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -206,19 +204,7 @@
     <MESSAGE value="Complete GUI done" />
     <MESSAGE value="buttons on admin thing work" />
     <MESSAGE value="delete line works" />
-    <MESSAGE value="edit works besides consistancy" />
-    <MESSAGE value="last of sat" />
-    <option name="LAST_COMMIT_MESSAGE" value="last of sat" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Application.java</url>
-          <line>155</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Room/Course Editor works" />
+    <option name="LAST_COMMIT_MESSAGE" value="Room/Course Editor works" />
   </component>
 </project>

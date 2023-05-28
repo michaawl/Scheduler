@@ -211,7 +211,7 @@ public class Application {
             //LoginGUI logingui = new LoginGUI();
             //AdminGUI adminGUI = new AdminGUI();
             //RegisterGUI registerGUI = new RegisterGUI();
-        StudentGUI studentGUI = new StudentGUI();
+            StudentGUI studentGUI = new StudentGUI(Person.PersonArray.get(2));
 
 
         }

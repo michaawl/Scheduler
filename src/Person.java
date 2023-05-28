@@ -5,7 +5,7 @@
  * Last Change: 03.05.2023
  */
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Person {
@@ -19,6 +19,17 @@ public class Person {
     private String password;
 
     static CopyOnWriteArrayList<Person> PersonArray = new CopyOnWriteArrayList<>();
+
+    public Set<String> getStudentSet() {
+        return studentSet;
+    }
+
+    public void setStudentSet(Set<String> studentSet) {
+        this.studentSet = studentSet;
+    }
+
+    //static Map<String, Set<String>> courseMap = new HashMap<>();
+    private Set <String> studentSet = new HashSet<>();
 
     static int userCount = 0;
 

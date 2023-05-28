@@ -64,7 +64,7 @@ public class AdminGUI extends JFrame{
     static DefaultListModel<String> roomListModel = new DefaultListModel<>();
     static DefaultListModel<String> timetableListModel = new DefaultListModel<>();
 
-    public AdminGUI(){
+    public AdminGUI(Person user){
 
         // Set the layout manager for the main panel
         panelMain.setLayout(new CardLayout());
@@ -456,7 +456,7 @@ public class AdminGUI extends JFrame{
 
                 getContentPane().remove(panelMain);
                 dispose();
-                RegisterGUI startFrame = new RegisterGUI();
+                RegisterGUI startFrame = new RegisterGUI(user);
             }
         });
 
