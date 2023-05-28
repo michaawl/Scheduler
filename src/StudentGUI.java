@@ -179,17 +179,21 @@ public class StudentGUI extends JFrame {
 
                 String courseName = courseList.getSelectedValue().toString();
 
-                addDelCourse("src/csv/students.csv", user, courseName, true); //true add, false remove
+                if(checkConsistancy(user, courseName)){
 
-                selectedListModel.clear();
+                    addDelCourse("src/csv/students.csv", user, courseName, true); //true add, false remove
 
-                if (!user.getStudentCourseList().isEmpty()) {
-                    for (String course : user.getStudentCourseList()) {
-                        selectedListModel.addElement(course);
+                    selectedListModel.clear();
+
+                    if (!user.getStudentCourseList().isEmpty()) {
+                        for (String course : user.getStudentCourseList()) {
+                            selectedListModel.addElement(course);
+                        }
                     }
+
+                } else{
+                    System.out.println("Already booked other courses at that time!");
                 }
-
-
             }
         });
 
@@ -296,45 +300,132 @@ public class StudentGUI extends JFrame {
 
     }
 
+    static boolean checkConsistancy(Person user, String course){
+
+        Boolean[][] checkArray = new Boolean[16][6];
+        int row = 0;
+        int column = 0;
+        int start = 0;
+        int end = 0;
+
+        for(int i = 0; i<16; i++){
+
+            for(int m = 0; m<6; m++){
+                checkArray[i][m] = false;
+            }
+
+        }
+
+        for(Course checkCourse : Course.CourseArray){
+
+            if(checkCourse.getCourse().equals(course)){
+
+                start = checkCourse.getStartTime();
+                end = checkCourse.getEndTime();
+                String day = checkCourse.getDay();
+
+                column = getColumnofDay(day);
+
+                row = start - 8;
+
+                while(row<(end-8)){
+
+                    if(checkArray[row][column] == false){
+                        checkArray[row][column] = true;
+                    }else {
+                        return false;
+                    }
+                    row++;
+                }
+
+            }
+
+        }
+
+
+        for(String studentCourseString : user.getStudentCourseList()){
+
+            for(Course checkCourse : Course.CourseArray){
+
+                if(checkCourse.getCourse().equals(studentCourseString)){
+
+                    start = checkCourse.getStartTime();
+                    end = checkCourse.getEndTime();
+                    String day = checkCourse.getDay();
+
+                    column = getColumnofDay(day);
+
+                    row = start - 8;
+
+                    while(row<(end-8)){
+
+                        if(checkArray[row][column] == false){
+                            checkArray[row][column] = true;
+                        }else {
+                            return false;
+                        }
+                        row++;
+                    }
+
+                }
+            }
+        }
+
+
+
+
+        return true;
+    }
+
+
     static public void setValueToTimetable(int start, int end, String day, String room, String course){
 
         int row = 0;
         int column = 0;
         String tableString = course + " (Room: " + room + ")";
 
+        column = getColumnofDay(day);
+
+
+
+        if(column>-1){
+
+            row = start - 8;
+
+            while(row<(end-8)){
+                tableModel.setValueAt(tableString,row,column);
+                row++;
+            }
+        }
+
+
+
+    }
+
+    static int getColumnofDay(String day){
+
         switch (day) {
             case "Monday":
-                column = 1;
+                return 1;
 
-                break;
             case "Tuesday":
-                column = 2;
-                break;
+                return 2;
+
             case "Wednesday":
-                column = 3;
+                return 3;
 
-                break;
+
             case "Thursday":
-                column = 4;
+                return 4;
 
-                break;
             case "Friday":
-                column = 5;
+                return 5;
 
-                break;
             default:
                 System.out.println("Invalid day.");
-                break;
+                return -1;
 
         }
-
-        row = start - 8;
-
-        while(row<(end-8)){
-            tableModel.setValueAt(tableString,row,column);
-            row++;
-        }
-
 
     }
 

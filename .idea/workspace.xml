@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="booking course and deleting booked booking course works">
+    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="timetable works">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StudentGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudentGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/csv/students.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/students.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/csv/timetable.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/timetable.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685282250325</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="timetable works">
+      <created>1685287992028</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1685287992028</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,7 +220,8 @@
     <MESSAGE value="Room/Course Editor works" />
     <MESSAGE value="Student can book course" />
     <MESSAGE value="booking course and deleting booked booking course works" />
-    <option name="LAST_COMMIT_MESSAGE" value="booking course and deleting booked booking course works" />
+    <MESSAGE value="timetable works" />
+    <option name="LAST_COMMIT_MESSAGE" value="timetable works" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -225,14 +231,15 @@
           <line>46</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/StudentGUI.java</url>
-          <line>256</line>
-          <properties method="actionPerformed">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="6" />
+          <line>181</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/StudentGUI.java</url>
+          <line>318</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
