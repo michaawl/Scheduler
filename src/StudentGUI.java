@@ -20,6 +20,7 @@ public class StudentGUI extends JFrame{
     private JScrollPane scrollPane1;
     private JScrollPane scrollPane2;
     private JScrollPane scrollPane;
+    private JTable table1;
     static DefaultListModel<String> courseListModel = new DefaultListModel<>();
     static DefaultListModel<String> selectedListModel = new DefaultListModel<>();
 
@@ -35,12 +36,17 @@ public class StudentGUI extends JFrame{
         CardLayout cardLayout = (CardLayout) panelMain.getLayout();
 
         //TABLE SETTINGS
-        int numRows = 17;
-        int numColumns = 5;
+        Object[][] data = new Object[16][6];
+        table1.setModel(new DefaultTableModel(
+                data,
+                new String[]{" ", "Monday", "Tuesday", "Wednesay", "Thursday", "Friday"}
+        ));
 
-        DefaultTableModel tableModel = new DefaultTableModel(4, 3);
-        JTable table1 = new JTable(tableModel);
-        JScrollPane scrollPane = new JScrollPane(table1);
+        DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
+
+        for(int i = 8; i<24; i++){
+            tableModel.setValueAt(i + ":00", i-8, 0);
+        }
 
 
         getContentPane().add(panelMain);
@@ -49,6 +55,7 @@ public class StudentGUI extends JFrame{
         setLocationRelativeTo(null); //centering window
 
         setVisible(true);
+
 
         /*
         ################ COURSE MENU ################
