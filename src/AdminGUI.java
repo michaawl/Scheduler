@@ -125,42 +125,53 @@ public class AdminGUI extends JFrame{
                 int start = Integer.parseInt(comboBox2.getSelectedItem().toString());
                 int end = Integer.parseInt(comboBox3.getSelectedItem().toString());
                 String courseStrg = ccCourseList.getSelectedValue().toString();
+                String day = comboBox1.getSelectedItem().toString();
                 String room = "";
 
-                try{
+                ArrayList<String> collisionStudents = new ArrayList<>();
+                collisionStudents = timeConsistancyChecker(courseStrg, day, start, end);
 
 
-                    room = ccRoomList.getSelectedValue().toString();
-                    String day = comboBox1.getSelectedItem().toString();
+                if(collisionStudents.isEmpty()){
+                    try{
 
-                    if(roomConsistancyChecker(room, day, start, end)){
 
-                        msgLbl.setText("Created course: " + courseStrg + " in room " +
-                                room + " from " + day + ", " + start + ":00h to " +end + ":00h");
+                        room = ccRoomList.getSelectedValue().toString();
 
-                        String line = courseStrg + "," + room + "," + day + "," + start + "," + end;
+                        if(roomConsistancyChecker(room, day, start, end)){
 
-                        Application.writeToCSVFile(line, "src/csv/timetable.csv");
+                            msgLbl.setText("Created course: " + courseStrg + " in room " +
+                                    room + " from " + day + ", " + start + ":00h to " +end + ":00h");
 
-                        Course course = new Course();
-                        course.setCourse(courseStrg);
-                        course.setRoom(room);
-                        course.setStartTime(start);
-                        course.setEndTime(end);
-                        course.setDay(day);
+                            String line = courseStrg + "," + room + "," + day + "," + start + "," + end;
 
-                        Course.CourseArray.add(course);
+                            Application.writeToCSVFile(line, "src/csv/timetable.csv");
 
-                    }else{
-                        System.out.println("Room no available");
+                            Course course = new Course();
+                            course.setCourse(courseStrg);
+                            course.setRoom(room);
+                            course.setStartTime(start);
+                            course.setEndTime(end);
+                            course.setDay(day);
+
+                            Course.CourseArray.add(course);
+
+                        }else{
+                            System.out.println("Room no available");
+                        }
+
+                    }catch (Exception e4){
+                        room = "noroom";
+                    }
+                }else{
+
+                    System.out.printf("Cannot change course because of collision, change time or remove students from Course. \nCollision students are:");
+
+                    for(String collisionStudent : collisionStudents){
+                        System.out.printf(" " + collisionStudent);
                     }
 
-                }catch (Exception e4){
-                     room = "noroom";
                 }
-
-
-
             }
         });
 
@@ -428,36 +439,53 @@ public class AdminGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
                 String editLine = "";
-                int  newStart = Integer.parseInt(comboBox6.getSelectedItem().toString());
+                int newStart = Integer.parseInt(comboBox6.getSelectedItem().toString());
                 int newEnd = Integer.parseInt(comboBox9.getSelectedItem().toString());
                 int editIndex = eTimetableList.getSelectedIndex();
 
                 Course editCourse = Course.CourseArray.get(editIndex);
 
-                Course.CourseArray.get(editIndex).setStartTime(newStart);
-                Course.CourseArray.get(editIndex).setEndTime(newEnd);
+                String day = editCourse.getDay();
+                String courseEdit = editCourse.getCourse();
 
-                editLine = editCourse.getCourse() + "," + editCourse.getRoom() + "," +
-                        editCourse.getDay() + "," + newStart + "," +
-                        newEnd;
+                ArrayList<String> collisionStudents = new ArrayList<>();
+                collisionStudents = timeConsistancyChecker(courseEdit, day, newStart, newEnd);
 
-                Application.editCSVFile("src/csv/timetable.csv", editIndex, editLine);
+                if (collisionStudents.isEmpty()) {
+                    Course.CourseArray.get(editIndex).setStartTime(newStart);
+                    Course.CourseArray.get(editIndex).setEndTime(newEnd);
 
-                System.out.println(editLine);
+                    editLine = editCourse.getCourse() + "," + editCourse.getRoom() + "," +
+                            editCourse.getDay() + "," + newStart + "," +
+                            newEnd;
 
-                timetableListModel.clear();
+                    Application.editCSVFile("src/csv/timetable.csv", editIndex, editLine);
 
-                for(Course course : Course.CourseArray){
+                    System.out.println(editLine);
 
-                    String courseInfo = "";
-                    courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
-                            ". Date: " + course.getDay() + ", " +course.getStartTime() + "-" + course.getEndTime()+
-                            " o'clock";
+                    timetableListModel.clear();
 
-                    timetableListModel.addElement(courseInfo);
+                    for (Course course : Course.CourseArray) {
+
+                        String courseInfo = "";
+                        courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
+                                ". Date: " + course.getDay() + ", " + course.getStartTime() + "-" + course.getEndTime() +
+                                " o'clock";
+
+                        timetableListModel.addElement(courseInfo);
+                    }
+
+                } else{
+
+                    System.out.printf("Cannot change course because of collision, change time or remove students from Course. \nCollision students are:");
+
+                    for(String collisionStudent : collisionStudents){
+                        System.out.printf(" " + collisionStudent);
+                    }
+
                 }
-
             }
+
         });
 
         deleteButton.addActionListener(new ActionListener() {
@@ -695,6 +723,56 @@ public class AdminGUI extends JFrame{
             }
         });
 
+    }
+
+    static ArrayList<String> timeConsistancyChecker(String editCourse, String day, int startTime, int endTime){
+
+        ArrayList<String> stringList = new ArrayList<>();
+        boolean studentIsInCourse = false;
+
+        for(Person allStudents : Person.PersonArray){
+
+            if(allStudents.isStudentStatus()){
+                studentIsInCourse = false;
+
+                for(String studentCourse : allStudents.getStudentCourseList()){
+
+                    if(studentCourse.equals(editCourse)){
+                        studentIsInCourse = true;
+                    }
+                }
+
+                if(studentIsInCourse) {
+
+                    for(String studentCourse : allStudents.getStudentCourseList()){
+
+                        for(Course allCourses : Course.CourseArray){
+
+                            if(allCourses.getCourse().equals(studentCourse) && allCourses.getDay().equals(day) && !(allCourses.getCourse().equals(editCourse))){
+
+                                int c1_S = allCourses.getStartTime();
+                                int c1_E = allCourses.getEndTime();
+
+                                int c2_S = startTime;
+                                int c2_E = endTime;
+
+                                if((c2_S <= c1_S) && (c2_E > c1_S)){
+                                    stringList.add(allStudents.getUsername());
+                                }
+
+                                if((c2_S < c1_E) && (c2_S >= c1_S)){
+                                    stringList.add(allStudents.getUsername());
+                                }
+
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+        return stringList;
     }
 
     static boolean roomConsistancyChecker(String room, String day, int startTime, int endTime){

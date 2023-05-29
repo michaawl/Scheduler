@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="student consistancy check works">
+    <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="room consistnacy check works">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AdminGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/csv/students.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/students.csv" afterDir="false" />
@@ -118,7 +118,8 @@
       <workItem from="1685189381721" duration="4876000" />
       <workItem from="1685198326843" duration="3154000" />
       <workItem from="1685311207898" duration="5106000" />
-      <workItem from="1685319797280" duration="1773000" />
+      <workItem from="1685319797280" duration="1981000" />
+      <workItem from="1685351939272" duration="4065000" />
     </task>
     <task id="LOCAL-00001" summary="csv files erstellt">
       <created>1683925797406</created>
@@ -204,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685300452189</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="room consistnacy check works">
+      <created>1685322781708</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1685322781708</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,17 +240,7 @@
     <MESSAGE value="booking course and deleting booked booking course works" />
     <MESSAGE value="timetable works" />
     <MESSAGE value="student consistancy check works" />
-    <option name="LAST_COMMIT_MESSAGE" value="student consistancy check works" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/StudentGUI.java</url>
-          <line>323</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="room consistnacy check works" />
+    <option name="LAST_COMMIT_MESSAGE" value="room consistnacy check works" />
   </component>
 </project>
