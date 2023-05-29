@@ -35,100 +35,10 @@ public class StudentGUI extends JFrame {
     private JLabel usnrmLbl;
     private JLabel usrnmLbl2;
     private JButton viewAllCoursesButton;
+    private JLabel errorLbl;
     static DefaultListModel<String> courseListModel = new DefaultListModel<>();
     static DefaultListModel<String> selectedListModel = new DefaultListModel<>();
     static DefaultTableModel tableModel = new DefaultTableModel();
-
-    static int addDelCourse(String filepath, Person user, String addDelCourse, boolean addTrue) {
-
-        //check if student is in list
-
-        String line = "";
-        String editString = "";
-        int lineInt = 0;
-        CopyOnWriteArrayList<String> updateList = user.getStudentCourseList();
-
-        try {
-
-            FileReader reader = new FileReader(filepath);
-            BufferedReader bufferedReader = new BufferedReader(reader);
-            while ((line = bufferedReader.readLine()) != null) {
-
-                String[] data = line.split(",");
-
-                StringTokenizer tokenizer = new StringTokenizer(line, ",");
-
-                if (data[0].equals(user.getUsername())) {
-                    //skip first element
-                    if (tokenizer.hasMoreTokens()) {
-
-                        editString = tokenizer.nextToken();
-                    }
-
-
-                    //element 2 until end
-                    while (tokenizer.hasMoreTokens()) {
-                        if (addTrue) {
-                            // ADD
-                            String bookedCourses = tokenizer.nextToken();
-                            editString = editString + "," + bookedCourses;
-
-                            if (bookedCourses.equals(addDelCourse)) {
-                                System.out.println("Course already booked.");
-                                return 1;
-                            }
-                        } else {
-                            // DELETE
-                            String bookedCourses = tokenizer.nextToken();
-                            if (bookedCourses.equals(addDelCourse)) {
-                                continue;
-                            } else {
-                                editString = editString + "," + bookedCourses;
-                            }
-                        }
-
-                    }
-
-                    if(addTrue){
-
-                        System.out.println(editString);
-                        editString = editString + "," + addDelCourse;
-                        Application.editCSVFile("src/csv/students.csv", lineInt, editString);
-                        System.out.println("Course added to selected student.");
-
-                        updateList.add(addDelCourse);
-                    }else {
-                        System.out.println(editString);
-                        editString = editString;
-                        Application.editCSVFile("src/csv/students.csv", lineInt, editString);
-                        System.out.println("Course deleted from selected student.");
-
-                        updateList.remove(addDelCourse);
-                    }
-
-                    user.setStudentCourseList(updateList);
-
-                    return 0;
-                }
-
-                lineInt++;
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-
-        }
-
-
-        editString = user.getUsername() + "," + addDelCourse;
-        Application.writeToCSVFile(editString, "src/csv/students.csv");
-
-        updateList.add(addDelCourse);
-        user.setStudentCourseList(updateList);
-
-        System.out.println("Added student to student.csv list.");
-
-        return 2;
-    }
 
     public StudentGUI(Person user) {
 
@@ -140,6 +50,7 @@ public class StudentGUI extends JFrame {
         panelMain.add(panelTimetable, "panelTimetable");
 
         usnrmLbl.setText(user.getUsername());
+        errorLbl.setText("");
 
         CardLayout cardLayout = (CardLayout) panelMain.getLayout();
 
@@ -179,30 +90,47 @@ public class StudentGUI extends JFrame {
         scrollPane2.setViewportView(selectedList);
 
 
+        //adds course to list
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String courseName = courseList.getSelectedValue().toString();
+                try{
 
-                if(checkConsistancy(user, courseName)){
+                    String courseName = courseList.getSelectedValue().toString();
 
-                    addDelCourse("src/csv/students.csv", user, courseName, true); //true add, false remove
+                    if(checkConsistancy(user, courseName)){
 
-                    selectedListModel.clear();
+                        int errorMg = addDelCourse("src/csv/students.csv", user, courseName, true); //true add, false remove
+
+                        if(errorMg == 0){
+                            errorLbl.setText("Course added");
+                        }
+
+                        if(errorMg == 1){
+                            errorLbl.setText("Course already booked.");
+                        }
+
+                        selectedListModel.clear();
 
 
-                    for (String course : user.getStudentCourseList()) {
-                        selectedListModel.addElement(course);
+                        for (String course : user.getStudentCourseList()) {
+                            selectedListModel.addElement(course);
+                        }
+
+
+                    } else{
+                        System.out.println("Already booked other courses at that time!");
+                        errorLbl.setText("Already booked other courses at that time!");
                     }
 
-
-                } else{
-                    System.out.println("Already booked other courses at that time!");
+                } catch (Exception e2){
+                    errorLbl.setText("Select item from list.");
                 }
             }
         });
 
+        //removes course from list
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -221,7 +149,6 @@ public class StudentGUI extends JFrame {
 
             }
         });
-
 
         selectCoursesButton.addActionListener(new ActionListener() {
             @Override
@@ -314,6 +241,99 @@ public class StudentGUI extends JFrame {
         });
     }
 
+    static int addDelCourse(String filepath, Person user, String addDelCourse, boolean addTrue) {
+
+        //check if student is in list
+
+        String line = "";
+        String editString = "";
+        int lineInt = 0;
+        CopyOnWriteArrayList<String> updateList = user.getStudentCourseList();
+
+        try {
+
+            FileReader reader = new FileReader(filepath);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            while ((line = bufferedReader.readLine()) != null) {
+
+                String[] data = line.split(",");
+
+                StringTokenizer tokenizer = new StringTokenizer(line, ",");
+
+                if (data[0].equals(user.getUsername())) {
+                    //skip first element
+                    if (tokenizer.hasMoreTokens()) {
+
+                        editString = tokenizer.nextToken();
+                    }
+
+
+                    //element 2 until end
+                    while (tokenizer.hasMoreTokens()) {
+                        if (addTrue) {
+                            // ADD
+                            String bookedCourses = tokenizer.nextToken();
+                            editString = editString + "," + bookedCourses;
+
+                            if (bookedCourses.equals(addDelCourse)) {
+                                System.out.println("Course already booked.");
+                                return 1;
+                            }
+                        } else {
+                            // DELETE
+                            String bookedCourses = tokenizer.nextToken();
+                            if (bookedCourses.equals(addDelCourse)) {
+                                continue;
+                            } else {
+                                editString = editString + "," + bookedCourses;
+                            }
+                        }
+
+                    }
+
+                    if(addTrue){
+
+                        System.out.println(editString);
+                        editString = editString + "," + addDelCourse;
+                        Application.editCSVFile("src/csv/students.csv", lineInt, editString);
+                        System.out.println("Course added to selected student.");
+
+                        updateList.add(addDelCourse);
+                    }else {
+                        System.out.println(editString);
+                        editString = editString;
+                        Application.editCSVFile("src/csv/students.csv", lineInt, editString);
+                        System.out.println("Course deleted from selected student.");
+
+                        updateList.remove(addDelCourse);
+                    }
+
+                    user.setStudentCourseList(updateList);
+
+                    return 0;
+                }
+
+                lineInt++;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
+
+
+        editString = user.getUsername() + "," + addDelCourse;
+        Application.writeToCSVFile(editString, "src/csv/students.csv");
+
+        updateList.add(addDelCourse);
+        user.setStudentCourseList(updateList);
+
+        System.out.println("Added student to student.csv list.");
+
+        return 2;
+    }
+
+    //########## METHODS ##########
+
     static boolean checkConsistancy(Person user, String course){
 
         Boolean[][] checkArray = new Boolean[16][6];
@@ -385,9 +405,6 @@ public class StudentGUI extends JFrame {
             }
         }
 
-
-
-
         return true;
     }
 
@@ -400,8 +417,6 @@ public class StudentGUI extends JFrame {
 
         column = getColumnofDay(day);
 
-
-
         if(column>-1){
 
             row = start - 8;
@@ -411,9 +426,6 @@ public class StudentGUI extends JFrame {
                 row++;
             }
         }
-
-
-
     }
 
     static int getColumnofDay(String day){

@@ -842,24 +842,28 @@ public class AdminGUI extends JFrame {
 
                             if (allCourses.getCourse().equals(studentCourse) && allCourses.getDay().equals(day) && !(allCourses.getCourse().equals(editCourse))) {
 
-                                int c1_S = allCourses.getStartTime();
-                                int c1_E = allCourses.getEndTime();
+                                int s1 = allCourses.getStartTime();
+                                int e1 = allCourses.getEndTime();
 
-                                int c2_S = startTime;
-                                int c2_E = endTime;
+                                int s2 = startTime;
+                                int e2 = endTime;
 
-                                if ((c2_S <= c1_S) && (c2_E > c1_S)) {
+                                if ((s2 <= s1) && (e2 > s1)) {
                                     if (stringList.contains(allStudents.getUsername()) == false) {
                                         stringList.add(allStudents.getUsername());
                                     }
                                 }
 
-                                if ((c2_S < c1_E) && (c2_S >= c1_S)) {
+                                if ((s2 < e1 ) && (s2 >= s1)) {
                                     if (stringList.contains(allStudents.getUsername()) == false) {
                                         stringList.add(allStudents.getUsername());
                                     }
                                 }
-
+                                if (((s1<s2) && (e1>e2))|| (s1>s2 && e1<e2) || ((s1==s2)&&(e1==e2))) {
+                                    if (stringList.contains(allStudents.getUsername()) == false) {
+                                        stringList.add(allStudents.getUsername());
+                                    }
+                                }
                             }
                         }
                     }
@@ -878,11 +882,21 @@ public class AdminGUI extends JFrame {
         for (Course existingCourse : Course.CourseArray) {
 
             if (existingCourse.getRoom().equals(room) && existingCourse.getDay().equals(day)) {
-                if (existingCourse.getStartTime() >= startTime && existingCourse.getStartTime() < endTime) {
+
+                int s1 = existingCourse.getStartTime();
+                int s2 = startTime;
+                int e1 = existingCourse.getEndTime();
+                int e2 = endTime;
+
+                if ((s2 <= s1) && (e2 > s1)) {
                     return false;
                 }
 
-                if (existingCourse.getEndTime() < startTime && existingCourse.getEndTime() > startTime) {
+                if ((s2 < e1 ) && (s2 >= s1)) {
+                    return false;
+                }
+
+                if (((s1<s2) && (e1>e2))|| (s1>s2 && e1<e2) || ((s1==s2)&&(e1==e2))){
                     return false;
                 }
 
@@ -933,7 +947,6 @@ public class AdminGUI extends JFrame {
                         edited = true;
 
                     }
-
                 }
 
                 if (edited == false) {

@@ -82,7 +82,6 @@ public class RegisterGUI extends JFrame {
 
         scrollPane1.setViewportView(list1);
 
-
         progressLabel.setText(String.valueOf("Total Users: " + Person.userCount));
 
 
