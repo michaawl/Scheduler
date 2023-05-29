@@ -128,27 +128,37 @@ public class AdminGUI extends JFrame{
                 String room = "";
 
                 try{
-                     room = ccRoomList.getSelectedValue().toString();
+
+
+                    room = ccRoomList.getSelectedValue().toString();
+                    String day = comboBox1.getSelectedItem().toString();
+
+                    if(roomConsistancyChecker(room, day, start, end)){
+
+                        msgLbl.setText("Created course: " + courseStrg + " in room " +
+                                room + " from " + day + ", " + start + ":00h to " +end + ":00h");
+
+                        String line = courseStrg + "," + room + "," + day + "," + start + "," + end;
+
+                        Application.writeToCSVFile(line, "src/csv/timetable.csv");
+
+                        Course course = new Course();
+                        course.setCourse(courseStrg);
+                        course.setRoom(room);
+                        course.setStartTime(start);
+                        course.setEndTime(end);
+                        course.setDay(day);
+
+                        Course.CourseArray.add(course);
+
+                    }else{
+                        System.out.println("Room no available");
+                    }
+
                 }catch (Exception e4){
                      room = "noroom";
                 }
-                String day = comboBox1.getSelectedItem().toString();
 
-                msgLbl.setText("Created course: " + courseStrg + " in room " +
-                        room + " from " + day + ", " + start + ":00h to " +end + ":00h");
-
-                String line = courseStrg + "," + room + "," + day + "," + start + "," + end;
-
-                Application.writeToCSVFile(line, "src/csv/timetable.csv");
-
-                Course course = new Course();
-                course.setCourse(courseStrg);
-                course.setRoom(room);
-                course.setStartTime(start);
-                course.setEndTime(end);
-                course.setDay(day);
-
-                Course.CourseArray.add(course);
 
 
             }
@@ -382,26 +392,33 @@ public class AdminGUI extends JFrame{
 
                 Course editCourse = Course.CourseArray.get(editIndex);
 
-                Course.CourseArray.get(editIndex).setRoom(editRoom);
+                if(roomConsistancyChecker(editRoom, editCourse.getDay(), editCourse.getStartTime(), editCourse.getEndTime())){
 
-                editLine = editCourse.getCourse() + "," + editRoom + "," +
-                        editCourse.getDay() + "," + editCourse.getStartTime() + "," +
-                        editCourse.getEndTime();
+                    Course.CourseArray.get(editIndex).setRoom(editRoom);
 
-                Application.editCSVFile("src/csv/timetable.csv", editIndex, editLine);
+                    editLine = editCourse.getCourse() + "," + editRoom + "," +
+                            editCourse.getDay() + "," + editCourse.getStartTime() + "," +
+                            editCourse.getEndTime();
 
-                System.out.println(editLine);
+                    Application.editCSVFile("src/csv/timetable.csv", editIndex, editLine);
 
-                timetableListModel.clear();
+                    System.out.println(editLine);
 
-                for(Course course : Course.CourseArray){
+                    timetableListModel.clear();
 
-                    String courseInfo = "";
-                    courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
-                            ". Date: " + course.getDay() + ", " +course.getStartTime() + "-" + course.getEndTime()+
-                            " o'clock";
+                    for(Course course : Course.CourseArray){
 
-                    timetableListModel.addElement(courseInfo);
+                        String courseInfo = "";
+                        courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
+                                ". Date: " + course.getDay() + ", " +course.getStartTime() + "-" + course.getEndTime()+
+                                " o'clock";
+
+                        timetableListModel.addElement(courseInfo);
+
+                }
+
+                } else{
+                    System.out.println("Selected room not available.");
                 }
             }
         });
@@ -678,6 +695,26 @@ public class AdminGUI extends JFrame{
             }
         });
 
+    }
+
+    static boolean roomConsistancyChecker(String room, String day, int startTime, int endTime){
+
+        for(Course existingCourse : Course.CourseArray){
+
+            if(existingCourse.getRoom().equals(room) && existingCourse.getDay().equals(day)){
+                if(existingCourse.getStartTime()>= startTime && existingCourse.getStartTime()<endTime){
+                    return false;
+                }
+
+                if(existingCourse.getEndTime()<startTime && existingCourse.getEndTime() > startTime){
+                    return false;
+                }
+
+            }
+
+        }
+
+        return true;
     }
 
     static void removeRoomfromCourse(String filePath, String room) {
