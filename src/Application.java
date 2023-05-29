@@ -308,9 +308,10 @@ public class Application {
 
 
             //LoginGUI logingui = new LoginGUI();
-            AdminGUI adminGUI = new AdminGUI(Person.PersonArray.get(0));
+            //AdminGUI adminGUI = new AdminGUI(Person.PersonArray.get(0));
             //RegisterGUI registerGUI = new RegisterGUI();
             //StudentGUI studentGUI = new StudentGUI(Person.PersonArray.get(2));
+        Preferences preferences = new Preferences(Person.PersonArray.get(0));
 
         }
 

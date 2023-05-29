@@ -512,13 +512,6 @@ public class AdminGUI extends JFrame{
             }
         });
 
-        checkConsistencyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
         backButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -639,15 +639,6 @@
                           <text value="Current room of selected course at selected timeslot:"/>
                         </properties>
                       </component>
-                      <component id="a301d" class="javax.swing.JButton" binding="backButton1" default-binding="true">
-                        <constraints>
-                          <grid row="8" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <text value="Back"/>
-                        </properties>
-                      </component>
                       <component id="6fe8a" class="javax.swing.JLabel">
                         <constraints>
                           <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -707,15 +698,6 @@
                         </constraints>
                         <properties>
                           <text value="Delete"/>
-                        </properties>
-                      </component>
-                      <component id="31095" class="javax.swing.JButton" binding="checkConsistencyButton" default-binding="true">
-                        <constraints>
-                          <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <text value="Check consistency"/>
                         </properties>
                       </component>
                       <component id="d9af2" class="javax.swing.JLabel">
@@ -798,15 +780,6 @@
                           <text value="Delete selected timeslot:"/>
                         </properties>
                       </component>
-                      <component id="6710" class="javax.swing.JLabel">
-                        <constraints>
-                          <grid row="7" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="0.0"/>
-                        </constraints>
-                        <properties>
-                          <text value="Check timetables consistancy:"/>
-                        </properties>
-                      </component>
                       <component id="b2c29" class="javax.swing.JLabel" binding="h">
                         <constraints>
                           <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -814,6 +787,15 @@
                         </constraints>
                         <properties>
                           <text value="h"/>
+                        </properties>
+                      </component>
+                      <component id="a301d" class="javax.swing.JButton" binding="backButton1" default-binding="true">
+                        <constraints>
+                          <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <gridbag weightx="1.0" weighty="0.0"/>
+                        </constraints>
+                        <properties>
+                          <text value="Back"/>
                         </properties>
                       </component>
                     </children>

@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2fa3949-c3ae-44f2-96ee-2788f13e41b5" name="Changes" comment="room consistnacy check works">
+      <change afterPath="$PROJECT_DIR$/src/Preference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/csv/preferences.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminGUI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AdminGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/csv/students.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/students.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/csv/timetable.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/csv/timetable.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Preferences.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Preferences.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Preferences.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Preferences.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +124,7 @@
       <workItem from="1685311207898" duration="5106000" />
       <workItem from="1685319797280" duration="1981000" />
       <workItem from="1685351939272" duration="4065000" />
+      <workItem from="1685356836150" duration="3857000" />
     </task>
     <task id="LOCAL-00001" summary="csv files erstellt">
       <created>1683925797406</created>
