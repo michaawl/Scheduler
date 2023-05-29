@@ -3,6 +3,10 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.StringTokenizer;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Preferences extends JFrame{
     private JTabbedPane tabbedPane1;
@@ -17,6 +21,7 @@ public class Preferences extends JFrame{
     private JScrollPane scrollPaneCourse;
     private JScrollPane scrollPaneRoom;
     private JScrollPane scrollPanePreference;
+    private JLabel prfrcsLbl;
 
     static DefaultListModel<String> preferenceListModel = new DefaultListModel<>();
     static DefaultListModel<String> courseListModel = new DefaultListModel<>();
@@ -101,6 +106,23 @@ public class Preferences extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                int index = preferenceList.getSelectedIndex();
+                Preference selectedP = Preference.PreferenceArray.get(index);
+
+                String courseStrg = selectedP.getCourse();
+                String roomStrg = selectedP.getRoom();
+                String dayStrg = selectedP.getDay();
+                String startTime = String.valueOf(selectedP.getStartTime());
+                String endTime = String.valueOf(selectedP.getEndTime());
+
+                String line = courseStrg + "," + roomStrg + "," + dayStrg + "," + startTime + "," + endTime;;
+
+                if(checkPreference(line)){
+                    prfrcsLbl.setText("Course set - Preference can be deleted!");
+                } else {
+                    prfrcsLbl.setText("Course not set yet.");
+                }
+
             }
         });
         mainMenuButton1.addActionListener(new ActionListener() {
@@ -145,6 +167,32 @@ public class Preferences extends JFrame{
         for(String course: Course.CourseListArray){
             courseListModel.addElement(course);
         }
+
+    }
+
+    public boolean checkPreference(String preferenceCheckString){
+
+        String line = "";
+        String courseString = "";
+        String filepath = "src/csv/timetable.csv";
+
+        try {
+
+            FileReader reader = new FileReader(filepath);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            while ((line = bufferedReader.readLine()) != null) {
+
+                if(line.equals(preferenceCheckString)){
+                    return true;
+                }
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
+
+        return false;
 
     }
 

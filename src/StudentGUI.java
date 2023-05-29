@@ -84,10 +84,6 @@ public class StudentGUI extends JFrame {
 
                     }
 
-
-
-
-
                     if(addTrue){
 
                         System.out.println(editString);

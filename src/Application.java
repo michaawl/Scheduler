@@ -306,11 +306,39 @@ public class Application {
             System.out.println(e);
         }
 
+        filepath = "src/csv/preferences.csv";
+        line = "";
 
-            //LoginGUI logingui = new LoginGUI();
+        try {
+
+            FileReader reader = new FileReader(filepath);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            while ((line = bufferedReader.readLine()) != null) {
+
+                String[] data = line.split(",");
+
+                Preference preference = new Preference();
+
+                preference.setCreator(data[0]);
+                preference.setCourse(data[1]);
+                preference.setRoom(data[2]);
+                preference.setDay(data[3]);
+                preference.setStartTime(Integer.parseInt(data[4]));
+                preference.setEndTime(Integer.parseInt(data[5]));
+
+                Preference.PreferenceArray.add(preference);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
+
+        //LoginGUI logingui = new LoginGUI();
             //AdminGUI adminGUI = new AdminGUI(Person.PersonArray.get(0));
             //RegisterGUI registerGUI = new RegisterGUI();
             //StudentGUI studentGUI = new StudentGUI(Person.PersonArray.get(2));
+
         Preferences preferences = new Preferences(Person.PersonArray.get(0));
 
         }
