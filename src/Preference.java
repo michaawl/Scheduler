@@ -1,5 +1,14 @@
+/*
+ * Project: Scheduler
+ * Scheduler program for Administrator, Assistants and Students
+ * Author:  Michael Muehlberger
+ * Last Change: 29.05.2023
+ */
+
+
 import java.util.concurrent.CopyOnWriteArrayList;
 
+//class Preference sets preference with course, room, startTime, endTime, day and creator of Preference, Preference Array includes all preferences.
 public class Preference {
 
     private String course;

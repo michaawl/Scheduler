@@ -1,13 +1,13 @@
 /*
- * Project: GUI
- * User Management Software using a Java GUI
+ * Project: Scheduler
+ * Scheduler program for Administrator, Assistants and Students
  * Author:  Michael Muehlberger
- * Last Change: 03.05.2023
+ * Last Change: 29.05.2023
  */
 
-import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+//class Person defines Person with usernames, email, password and whether the person is admin/assistant/student, PersonArray with all users, Studentcourse list with all courses a specific student has set
 public class Person {
 
 
@@ -49,6 +49,7 @@ public class Person {
     public void setPassword(String password) {
         this.password = password;
     }
+
     public boolean isAssistantStatus() {
         return assistantStatus;
     }
@@ -64,6 +65,7 @@ public class Person {
     public void setStudentStatus(boolean studentStatus) {
         this.studentStatus = studentStatus;
     }
+
     public boolean isAdminStatus() {
         return adminStatus;
     }

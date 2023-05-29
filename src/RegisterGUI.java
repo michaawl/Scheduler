@@ -1,9 +1,10 @@
 /*
- * Project: GUI
- * User Management Software using a Java GUI
+ * Project: Scheduler
+ * Scheduler program for Administrator, Assistants and Students
  * Author:  Michael Muehlberger
- * Last Change: 03.05.2023
+ * Last Change: 29.05.2023
  */
+
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

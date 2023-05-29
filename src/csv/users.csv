@@ -2,3 +2,5 @@ admin,email@admin.at,admin,true,false,false
 assistant,email@assistant.de,assistant,false,true,false
 student,email@student.ch,student,false,false,true
 teststudent,1234,1234,false,false,true
+ts,ts,t,false,true,false
+fasdfa,sdf,sdf,false,false,true

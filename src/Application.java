@@ -1,4 +1,11 @@
-import javax.imageio.IIOException;
+/*
+ * Project: Scheduler
+ * Scheduler program for Administrator, Assistants and Students
+ * Author:  Michael Muehlberger
+ * Last Change: 29.05.2023
+ */
+
+
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -6,6 +13,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Application {
 
 
+    //adds a String line to a given csv line in filepath
     static void writeToCSVFile(String line, String filepath) {
 
         try {
@@ -14,16 +22,14 @@ public class Application {
             csvWriter.flush();
 
         } catch (IOException e) {
-
+            System.out.println("Error occured writing to csv file.");
         }
     }
 
+    //deletes a line from a CSV File based on the first entry given in deleteLine
     static void deleteFromCSVFileByFirstEntry(String filepath, String deleteLine) {
 
-
         String line = "";
-        String delete = "";
-        int lineInt = 0;
         List<String> lines = new ArrayList<>();
 
         try {
@@ -34,19 +40,14 @@ public class Application {
 
                 String[] data = line.split(",");
 
-                StringTokenizer tokenizer = new StringTokenizer(line, ",");
-
                 if (!(data[0].equals(deleteLine))) {
 
                     lines.add(line);
 
                 }
-
-                lineInt++;
             }
         } catch (Exception e) {
-            System.out.println(e);
-
+            System.out.println("Error occured while reading in deleteing csv file line by first entry.");
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
@@ -61,12 +62,11 @@ public class Application {
             writer.flush();
 
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println("Error occured while writing in deleteing csv file line by first entry.");
         }
-
-
     }
 
+    //deletes a line from a csvFile by number of line deleteLine
     static void deleteFromCSVFile(String filePath, int deleteLine) {
 
         List<String> lines = new ArrayList<>();
@@ -74,7 +74,6 @@ public class Application {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 
             String line = "";
-
             int lineInt = 0;
 
             while ((line = reader.readLine()) != null) {
@@ -87,7 +86,7 @@ public class Application {
             }
 
         } catch (IOException e) {
-
+            System.out.println("Error occured while reading in deleteing csv file line by line.");
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
@@ -102,12 +101,11 @@ public class Application {
             writer.flush();
 
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println("Error occured while wrirting in deleteing csv file line by line.");
         }
-
-
     }
 
+    //edits a line given by int editLineInt into string editLineString
     static void editCSVFile(String filePath, int editLineInt, String editLineString) {
 
         List<String> lines = new ArrayList<>();
@@ -115,15 +113,13 @@ public class Application {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 
             String line = "";
-
             int lineInt = 0;
 
             while ((line = reader.readLine()) != null) {
 
                 if (lineInt != editLineInt) {
                     lines.add(line);
-                }
-                else {
+                } else {
                     lines.add(editLineString);
                 }
 
@@ -131,11 +127,10 @@ public class Application {
             }
 
         } catch (IOException e) {
-
+            System.out.println("Error occured while reading in editing csv file.");
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-
 
             for (String stringLine : lines) {
                 writer.write(stringLine);
@@ -146,17 +141,17 @@ public class Application {
             writer.flush();
 
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println("Error occured while writing in editing csv file.");
         }
 
 
     }
 
-    public static void addStudentSet(String filepath, Person student){
+    //adds booked courses from students (from csvFile) to studentCourseList ArrayList
+    public static void addStudentSet(String filepath, Person student) {
 
 
         String line = "";
-        String editString = "";
         CopyOnWriteArrayList<String> studentList = new CopyOnWriteArrayList<>();
 
         try {
@@ -169,10 +164,10 @@ public class Application {
 
                 StringTokenizer tokenizer = new StringTokenizer(line, ",");
 
-                if(data[0].equals(student.getUsername())){
+                if (data[0].equals(student.getUsername())) {
                     //skip first element
                     if (tokenizer.hasMoreTokens()) {
-                        editString = tokenizer.nextToken();
+                        tokenizer.nextToken();
                     }
 
                     //element 2 until end
@@ -183,25 +178,25 @@ public class Application {
 
                     }
 
-                    if(!studentList.isEmpty()){
+                    if (!studentList.isEmpty()) {
                         student.setStudentCourseList(studentList);
                     }
 
-                   return;
+                    return;
                 }
 
             }
-        }catch(Exception e){
-            System.out.println(e);
-
+        } catch (Exception e) {
+            System.out.println("Error occured when reading/writing students.csv");
         }
     }
 
 
-
     public static void main(String[] args) {
 
-        //copy data from users.csv file to PersonArray
+
+        // ##### copy data from users.csv file to PersonArray #####
+
         String filepath = "src/csv/users.csv";
         String line = "";
 
@@ -222,7 +217,7 @@ public class Application {
                 person.setAssistantStatus(Boolean.parseBoolean(data[4]));
                 person.setStudentStatus(Boolean.parseBoolean(data[5]));
 
-                if(person.isStudentStatus()){
+                if (person.isStudentStatus()) {
                     addStudentSet("src/csv/students.csv", person);
                 }
 
@@ -230,12 +225,12 @@ public class Application {
 
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Error occured when reading/writing users.csv");
         }
 
-        //copy data from courses.csv file to CourseListArray
+        // ##### copy data from courses.csv file to CourseListArray #####
+
         filepath = "src/csv/courses.csv";
-        line = "";
 
         try {
 
@@ -252,13 +247,13 @@ public class Application {
                 Course.CourseListArray.add(course);
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Error occured when reading/writing courses.csv");
 
         }
 
-        //copy data from rooms.csv file to RoomArray
+        // ##### copy data from rooms.csv file to RoomArray #####
+
         filepath = "src/csv/rooms.csv";
-        line = "";
 
         try {
 
@@ -274,14 +269,14 @@ public class Application {
 
                 Room.RoomArray.add(room);
             }
-            }catch(Exception e){
-                System.out.println(e);
+        } catch (Exception e) {
+            System.out.println("Error occured when reading/writing rooms.csv");
 
-            }
+        }
 
-        //copy data from timetable.csv file to CourseArray
+        // ##### copy data from timetable.csv file to CourseArray #####
+
         filepath = "src/csv/timetable.csv";
-        line = "";
 
         try {
 
@@ -303,11 +298,12 @@ public class Application {
 
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Error occured when reading/writing timetable.csv");
         }
 
+        // ##### copy data from preferences.csv file to PreferenceArray #####
+
         filepath = "src/csv/preferences.csv";
-        line = "";
 
         try {
 
@@ -330,17 +326,18 @@ public class Application {
 
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Error occured when reading/writing preferences.csv");
 
         }
 
-        //LoginGUI logingui = new LoginGUI();
-            //AdminGUI adminGUI = new AdminGUI(Person.PersonArray.get(0));
-            //RegisterGUI registerGUI = new RegisterGUI();
-            //StudentGUI studentGUI = new StudentGUI(Person.PersonArray.get(2));
+        LoginGUI logingui = new LoginGUI();
 
-        Preferences preferences = new Preferences(Person.PersonArray.get(0));
+        //AdminGUI adminGUI = new AdminGUI(Person.PersonArray.get(0));
+        //RegisterGUI registerGUI = new RegisterGUI();
+        //StudentGUI studentGUI = new StudentGUI(Person.PersonArray.get(2));
+        //Preferences preferences = new Preferences(Person.PersonArray.get(0));
+        //AssistantGUI assistantGUI = new AssistantGUI(Person.PersonArray.get(1));
 
-        }
+    }
 
 }

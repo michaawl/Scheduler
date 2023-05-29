@@ -1,3 +1,11 @@
+/*
+ * Project: Scheduler
+ * Scheduler program for Administrator, Assistants and Students
+ * Author:  Michael Muehlberger
+ * Last Change: 29.05.2023
+ */
+
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -67,6 +75,7 @@ public class AdminGUI extends JFrame{
     private JScrollPane scrollPaneS2;
     private JScrollPane scrollPaneS3;
     private JLabel studentMsg;
+    private JButton viewAllCoursesButton;
 
     static DefaultListModel<String> courseListModel = new DefaultListModel<>();
     static DefaultListModel<String> roomListModel = new DefaultListModel<>();
@@ -716,6 +725,22 @@ public class AdminGUI extends JFrame{
             }
         });
 
+        viewAllCoursesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getContentPane().remove(panelMain);
+                dispose();
+                AllCourses allCourses = new AllCourses(user);
+            }
+        });
+        preferencesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getContentPane().remove(panelMain);
+                dispose();
+                Preferences preferences = new Preferences(user);
+            }
+        });
     }
 
     static ArrayList<String> timeConsistancyChecker(String editCourse, String day, int startTime, int endTime){

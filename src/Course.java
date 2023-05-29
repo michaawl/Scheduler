@@ -1,5 +1,14 @@
+/*
+ * Project: Scheduler
+ * Scheduler program for Administrator, Assistants and Students
+ * Author:  Michael Muehlberger
+ * Last Change: 29.05.2023
+ */
+
+
 import java.util.concurrent.CopyOnWriteArrayList;
 
+//Class defines course with coursename, room, start time, end time, day of course, CourseListArray with all course names, CourseArray with all courses set
 public class Course {
 
     private String course;

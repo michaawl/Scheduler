@@ -1,3 +1,11 @@
+/*
+ * Project: Scheduler
+ * Scheduler program for Administrator, Assistants and Students
+ * Author:  Michael Muehlberger
+ * Last Change: 29.05.2023
+ */
+
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;

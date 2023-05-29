@@ -1,14 +1,18 @@
+/*
+ * Project: Scheduler
+ * Scheduler program for Administrator, Assistants and Students
+ * Author:  Michael Muehlberger
+ * Last Change: 29.05.2023
+ */
+
+
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -30,6 +34,7 @@ public class StudentGUI extends JFrame {
     private JTable table1;
     private JLabel usnrmLbl;
     private JLabel usrnmLbl2;
+    private JButton viewAllCoursesButton;
     static DefaultListModel<String> courseListModel = new DefaultListModel<>();
     static DefaultListModel<String> selectedListModel = new DefaultListModel<>();
     static DefaultTableModel tableModel = new DefaultTableModel();
@@ -299,6 +304,14 @@ public class StudentGUI extends JFrame {
             }
         });
 
+        viewAllCoursesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getContentPane().remove(panelMain);
+                dispose();
+                AllCourses allCourses = new AllCourses(user);
+            }
+        });
     }
 
     static boolean checkConsistancy(Person user, String course){
