@@ -16,12 +16,12 @@ public class AllCourses extends JFrame {
     private JButton backButton;
     private JScrollPane scrollPane;
     static DefaultListModel<String> courseListModel = new DefaultListModel<>();
+
+    //used in Admin, Assistant and student GUI to see all times of courses
 public AllCourses(Person user){
 
-    // Add the main panel to the JFrame content pane
     getContentPane().add(panelMain);
 
-    // Set JFrame properties
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(1200,600);
 
@@ -31,7 +31,6 @@ public AllCourses(Person user){
 
     JList allcoursesList = new JList();
     allcoursesList.setModel(courseListModel);
-
 
     scrollPane.setViewportView(allcoursesList);
 
@@ -46,6 +45,7 @@ public AllCourses(Person user){
         courseListModel.addElement(courseInfo);
     }
 
+    //back to Main Menu
     backButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {

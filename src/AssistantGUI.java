@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//GUI of Assistant users
 public class AssistantGUI extends JFrame{
     private JButton preferencesButton;
     private JButton logOutButton;
@@ -21,7 +22,6 @@ public class AssistantGUI extends JFrame{
 
         getContentPane().add(panelMain);
 
-        // Set JFrame properties
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200,600);
 

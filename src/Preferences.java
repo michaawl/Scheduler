@@ -7,15 +7,13 @@
 
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.StringTokenizer;
-import java.util.concurrent.CopyOnWriteArrayList;
 
+//GUI of Preferences, used for Assistance and Admin Users
 public class Preferences extends JFrame{
     private JTabbedPane tabbedPane1;
     private JPanel panelMain;
@@ -30,6 +28,7 @@ public class Preferences extends JFrame{
     private JScrollPane scrollPaneRoom;
     private JScrollPane scrollPanePreference;
     private JLabel prfrcsLbl;
+    private JLabel msgLbl;
 
     static DefaultListModel<String> preferenceListModel = new DefaultListModel<>();
     static DefaultListModel<String> courseListModel = new DefaultListModel<>();
@@ -37,18 +36,16 @@ public class Preferences extends JFrame{
 
     public Preferences(Person user){
 
-        // Set the layout manager for the main panel
         panelMain.setLayout(new CardLayout());
 
-
-        // Add the main panel to the JFrame content pane
         getContentPane().add(panelMain);
 
-        // Set JFrame properties
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200,600);
 
         setLocationRelativeTo(null); //centering window
+        prfrcsLbl.setText("");
+        msgLbl.setText("");
 
         setVisible(true);
 
@@ -70,43 +67,51 @@ public class Preferences extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String csvAddString = "";
+                try{
+                    String csvAddString = "";
 
-                String courseStrg = courseList.getSelectedValue().toString();
-                String roomStrg = roomList.getSelectedValue().toString();
-                String startTime = comboBox1.getSelectedItem().toString();
-                String endTime = comboBox3.getSelectedItem().toString();
-                String dayStrg = comboBox5.getSelectedItem().toString();
+                    String courseStrg = courseList.getSelectedValue().toString();
+                    String roomStrg = roomList.getSelectedValue().toString();
+                    String startTime = comboBox1.getSelectedItem().toString();
+                    String endTime = comboBox3.getSelectedItem().toString();
+                    String dayStrg = comboBox5.getSelectedItem().toString();
 
-                csvAddString = user.getUsername() + "," + courseStrg + "," + roomStrg + "," + dayStrg + "," + startTime + "," + endTime;
+                    csvAddString = user.getUsername() + "," + courseStrg + "," + roomStrg + "," + dayStrg + "," + startTime + "," + endTime;
 
-                Application.writeToCSVFile(csvAddString, "src/csv/preferences.csv");
+                    Application.writeToCSVFile(csvAddString, "src/csv/preferences.csv");
 
-                Preference preference = new Preference();
-                preference.setCreator(user.getUsername());
-                preference.setCourse(courseStrg);
-                preference.setRoom(roomStrg);
-                preference.setDay(dayStrg);
-                preference.setStartTime(Integer.parseInt(startTime));
-                preference.setEndTime(Integer.parseInt(endTime));
+                    Preference preference = new Preference();
+                    preference.setCreator(user.getUsername());
+                    preference.setCourse(courseStrg);
+                    preference.setRoom(roomStrg);
+                    preference.setDay(dayStrg);
+                    preference.setStartTime(Integer.parseInt(startTime));
+                    preference.setEndTime(Integer.parseInt(endTime));
 
-                Preference.PreferenceArray.add(preference);
+                    Preference.PreferenceArray.add(preference);
 
-                refreshLists();
+                    refreshLists();
 
 
+                } catch (Exception e2){
+                    msgLbl.setText("Not everything selected.");
+                }
             }
         });
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int deleteLine = preferenceList.getSelectedIndex();
+                try{
+                    int deleteLine = preferenceList.getSelectedIndex();
 
-                Application.deleteFromCSVFile("src/csv/preferences.csv", deleteLine);
-                Preference.PreferenceArray.remove(deleteLine);
+                    Application.deleteFromCSVFile("src/csv/preferences.csv", deleteLine);
+                    Preference.PreferenceArray.remove(deleteLine);
 
-                refreshLists();
+                    refreshLists();
+                } catch (Exception e2){
+                    prfrcsLbl.setText("Select line.");
+                }
 
             }
         });

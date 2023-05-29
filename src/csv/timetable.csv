@@ -1,9 +1,14 @@
 C1,room3,Monday,8,10
 C1,room2,Monday,13,17
 C2,room4,Tuesday,9,17
-C3,room2,Tuesday,10,15
+C3,room2,Tuesday,11,8
 C2,R2,Tuesday,11,12
-C2,R2,Monday,11,12
-C2,R2,Wednesday,11,12
+C2,R3,Monday,11,8
+C2,R2,Wednesday,8,12
 C2,R2,Friday,11,12
 C3,R3,Wednesday,11,12
+C2,noroom,Monday,8,10
+C2,R1,Monday,9,11
+C3,R3,Monday,9,11
+C2,R2,Monday,8,9
+C2,R3,Monday,8,9

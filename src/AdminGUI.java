@@ -12,11 +12,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class AdminGUI extends JFrame{
+public class AdminGUI extends JFrame {
     private JPanel panelMain;
     private JComboBox comboBox1;
     private JComboBox comboBox2;
@@ -76,6 +77,7 @@ public class AdminGUI extends JFrame{
     private JScrollPane scrollPaneS3;
     private JLabel studentMsg;
     private JButton viewAllCoursesButton;
+    private JLabel usrLbl;
 
     static DefaultListModel<String> courseListModel = new DefaultListModel<>();
     static DefaultListModel<String> roomListModel = new DefaultListModel<>();
@@ -84,31 +86,33 @@ public class AdminGUI extends JFrame{
     static DefaultListModel<String> studentListModel = new DefaultListModel<>();
     static DefaultListModel<String> selectedCourseListModel = new DefaultListModel<>();
 
-    public AdminGUI(Person user){
 
-        // Set the layout manager for the main panel
+    //sets the GUI of for Admin users
+    public AdminGUI(Person user) {
+
         panelMain.setLayout(new CardLayout());
 
-        // Add panels to the main panel
         panelMain.add(panel1, "panel1");
         panelMain.add(panel2, "panel2");
         panelMain.add(panel3, "panel3");
         panelMain.add(panel4, "panel4");
 
-        // Show panel2
+        // Show panel2, because this is the main menu
         CardLayout cardLayout = (CardLayout) panelMain.getLayout();
         cardLayout.show(panelMain, "panel2");
 
-        // Add the main panel to the JFrame content pane
         getContentPane().add(panelMain);
 
-        // Set JFrame properties
         setTitle("Admin GUI");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1200,600);
+        setSize(1200, 600);
         panel21.setBorder(new EmptyBorder(50, 20, 20, 20));
         panel22.setBorder(new EmptyBorder(50, 20, 20, 20));
         setLocationRelativeTo(null); //centering window
+        msgLbl.setText("");
+        slctdLbl.setText("");
+        studentMsg.setText("");
+        usrLbl.setText(user.getUsername());
 
         setVisible(true);
 
@@ -127,30 +131,40 @@ public class AdminGUI extends JFrame{
         scrollPane2.setViewportView(ccRoomList);
 
 
+        //Button adds a new course
         ccCreate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int start = Integer.parseInt(comboBox2.getSelectedItem().toString());
-                int end = Integer.parseInt(comboBox3.getSelectedItem().toString());
-                String courseStrg = ccCourseList.getSelectedValue().toString();
-                String day = comboBox1.getSelectedItem().toString();
-                String room = "";
+                try {
 
-                ArrayList<String> collisionStudents = new ArrayList<>();
-                collisionStudents = timeConsistancyChecker(courseStrg, day, start, end);
+                    int start = Integer.parseInt(comboBox2.getSelectedItem().toString());
+                    int end = Integer.parseInt(comboBox3.getSelectedItem().toString());
+                    String courseStrg = ccCourseList.getSelectedValue().toString();
+                    String day = comboBox1.getSelectedItem().toString();
+                    String room = "";
+
+                    ArrayList<String> collisionStudents = new ArrayList<>();
+                    collisionStudents = timeConsistancyChecker(courseStrg, day, start, end);
+
+                    if (end <= start) {
+                        msgLbl.setText("End time has to be bigger than start time.");
+                        return;
+                    }
 
 
-                if(collisionStudents.isEmpty()){
-                    try{
+                    if (collisionStudents.isEmpty()) {
+                        try {
+                            room = ccRoomList.getSelectedValue().toString();
 
+                        } catch (Exception e4) {
+                            room = "noroom";
+                        }
 
-                        room = ccRoomList.getSelectedValue().toString();
-
-                        if(roomConsistancyChecker(room, day, start, end)){
+                        if (roomConsistancyChecker(room, day, start, end) || room.equals("noroom")) {
 
                             msgLbl.setText("Created course: " + courseStrg + " in room " +
-                                    room + " from " + day + ", " + start + ":00h to " +end + ":00h");
+                                    room + " from " + day + ", " + start + ":00h to " + end + ":00h");
 
                             String line = courseStrg + "," + room + "," + day + "," + start + "," + end;
 
@@ -165,32 +179,32 @@ public class AdminGUI extends JFrame{
 
                             Course.CourseArray.add(course);
 
-                        }else{
-                            System.out.println("Room no available");
+                        } else {
+                            System.out.println("Room not available");
+                            msgLbl.setText("Room is not available at set time.");
                         }
 
-                    }catch (Exception e4){
-                        room = "noroom";
+                    } else {
+
+                        String errorStg = "Cannot change course because of collision, change time or remove students from Course. \nCollision students are: ";
+
+                        for (String collisionStudent : collisionStudents) {
+                            errorStg = errorStg + " " + collisionStudent;
+                        }
+
+                        msgLbl.setText(errorStg);
+
                     }
-                }else{
 
-                    System.out.printf("Cannot change course because of collision, change time or remove students from Course. \nCollision students are:");
-
-                    for(String collisionStudent : collisionStudents){
-                        System.out.printf(" " + collisionStudent);
-                    }
-
+                } catch (Exception e2) {
+                    System.out.println("Make sure all items are selected.");
+                    msgLbl.setText("Make sure all items are selected.");
                 }
+
             }
         });
 
-        ccBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelMain, "panel2");
-            }
-        });
-
+        //button in main menu which enters scene
         mainCC.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -199,14 +213,22 @@ public class AdminGUI extends JFrame{
                 courseListModel.clear();
                 roomListModel.clear();
 
-                for(String course: Course.CourseListArray){
+                for (String course : Course.CourseListArray) {
                     courseListModel.addElement(course);
                 }
 
-                for(Room room : Room.RoomArray){
+                for (Room room : Room.RoomArray) {
                     roomListModel.addElement(room.getRoom());
                 }
 
+            }
+        });
+
+        //button goes back to main menu
+        ccBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(panelMain, "panel2");
             }
         });
 
@@ -229,6 +251,7 @@ public class AdminGUI extends JFrame{
         scrollPane5.setViewportView(eTimetableList);
         scrollPane6.setViewportView(eRoomList2);
 
+        //button in main menu which enters scene
         mainEditor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -238,20 +261,20 @@ public class AdminGUI extends JFrame{
                 roomListModel.clear();
                 timetableListModel.clear();
 
-                for(String course: Course.CourseListArray){
+                for (String course : Course.CourseListArray) {
                     courseListModel.addElement(course);
                 }
 
-                for(Room room : Room.RoomArray){
+                for (Room room : Room.RoomArray) {
                     roomListModel.addElement(room.getRoom());
                 }
 
-                for(Course course : Course.CourseArray){
+                for (Course course : Course.CourseArray) {
 
                     String courseInfo = "";
                     courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
-                    ". Date: " + course.getDay() + ", " +course.getStartTime() + "-" + course.getEndTime()+
-                    " o'clock";
+                            ". Date: " + course.getDay() + ", " + course.getStartTime() + "-" + course.getEndTime() +
+                            " o'clock";
 
                     timetableListModel.addElement(courseInfo);
                 }
@@ -260,12 +283,13 @@ public class AdminGUI extends JFrame{
 
         //####### Edit Course #######
 
+        //adds course to list
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 String addCourseString = textField1.getText();
-                if(!addCourseString.isBlank()){
+                if (!addCourseString.isBlank()) {
 
                     Application.writeToCSVFile(addCourseString, "src/csv/courses.csv");
 
@@ -273,29 +297,31 @@ public class AdminGUI extends JFrame{
 
                     courseListModel.clear();
 
-                    for(String course: Course.CourseListArray){
+                    for (String course : Course.CourseListArray) {
                         courseListModel.addElement(course);
                     }
                 }
             }
         });
 
+        //deletes course from list
         deleteSelectedCourseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int deleteLine = eCourseList.getSelectedIndex();
-                String selectedCourse = eCourseList.getSelectedValue().toString();
-                System.out.println(deleteLine);
+                try {
 
-                Application.deleteFromCSVFile("src/csv/courses.csv", deleteLine);
-                Course.CourseListArray.remove(deleteLine);
+                    int deleteLine = eCourseList.getSelectedIndex();
+                    String selectedCourse = eCourseList.getSelectedValue().toString();
+                    System.out.println(deleteLine);
 
-                courseListModel.clear();
-                for (String course : Course.CourseListArray) {
-                    courseListModel.addElement(course);
-                }
+                    Application.deleteFromCSVFile("src/csv/courses.csv", deleteLine);
+                    Course.CourseListArray.remove(deleteLine);
 
+                    courseListModel.clear();
+                    for (String course : Course.CourseListArray) {
+                        courseListModel.addElement(course);
+                    }
 
 
                     for (Course courseElement : Course.CourseArray) {
@@ -305,172 +331,6 @@ public class AdminGUI extends JFrame{
                             Course.CourseArray.remove(courseElement);
                         }
                     }
-
-                timetableListModel.clear();
-
-                for(Course course : Course.CourseArray){
-
-                    String courseInfo = "";
-                    courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
-                            ". Date: " + course.getDay() + ", " +course.getStartTime() + "-" + course.getEndTime()+
-                            " o'clock";
-
-                    timetableListModel.addElement(courseInfo);
-                }
-
-            }
-
-        });
-
-        //####### Edit Room #######
-
-        addButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                String addRoomString = textField2.getText();
-                if(!addRoomString.isBlank()){
-
-                    Application.writeToCSVFile(addRoomString, "src/csv/rooms.csv");
-
-                    Room newRoom = new Room();
-                    newRoom.setRoom(addRoomString);
-                    Room.RoomArray.add(newRoom);
-
-                    roomListModel.clear();
-
-                    for(Room room : Room.RoomArray){
-                        roomListModel.addElement(room.getRoom());
-                    }
-                }
-
-            }
-        });
-
-        deleteSelectedRoomButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                int deleteLine = eRoomList.getSelectedIndex();
-                String roomString = eRoomList.getSelectedValue().toString();
-
-                if(deleteLine==0){
-
-                    System.out.println("noroom cannot be deleted.");
-
-                }
-                else {
-
-
-                    System.out.println(deleteLine);
-
-                    Application.deleteFromCSVFile("src/csv/rooms.csv",deleteLine);
-                    Room.RoomArray.remove(deleteLine);
-
-                    removeRoomfromCourse("src/csv/timetable.csv", roomString);
-
-                    for (Course courseElement : Course.CourseArray) {
-
-                        if (courseElement.getRoom().equals(roomString)) {
-                            courseElement.setRoom("noroom");
-                        }
-                    }
-
-                    roomListModel.clear();
-                    for(Room room : Room.RoomArray){
-                        roomListModel.addElement(room.getRoom());
-                    }
-
-                    timetableListModel.clear();
-
-                    for(Course course : Course.CourseArray){
-
-                        String courseInfo = "";
-                        courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
-                                ". Date: " + course.getDay() + ", " +course.getStartTime() + "-" + course.getEndTime()+
-                                " o'clock";
-
-                        timetableListModel.addElement(courseInfo);
-                    }
-
-                }
-
-            }
-        });
-
-        /*
-        ################### EDIT COURSES ###################
-         */
-
-        changeRoomButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                String editLine = "";
-                String editRoom = eRoomList2.getSelectedValue().toString();
-                int editIndex = eTimetableList.getSelectedIndex();
-
-                Course editCourse = Course.CourseArray.get(editIndex);
-
-                if(roomConsistancyChecker(editRoom, editCourse.getDay(), editCourse.getStartTime(), editCourse.getEndTime())){
-
-                    Course.CourseArray.get(editIndex).setRoom(editRoom);
-
-                    editLine = editCourse.getCourse() + "," + editRoom + "," +
-                            editCourse.getDay() + "," + editCourse.getStartTime() + "," +
-                            editCourse.getEndTime();
-
-                    Application.editCSVFile("src/csv/timetable.csv", editIndex, editLine);
-
-                    System.out.println(editLine);
-
-                    timetableListModel.clear();
-
-                    for(Course course : Course.CourseArray){
-
-                        String courseInfo = "";
-                        courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
-                                ". Date: " + course.getDay() + ", " +course.getStartTime() + "-" + course.getEndTime()+
-                                " o'clock";
-
-                        timetableListModel.addElement(courseInfo);
-
-                }
-
-                } else{
-                    System.out.println("Selected room not available.");
-                }
-            }
-        });
-
-        confrimEditButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                String editLine = "";
-                int newStart = Integer.parseInt(comboBox6.getSelectedItem().toString());
-                int newEnd = Integer.parseInt(comboBox9.getSelectedItem().toString());
-                int editIndex = eTimetableList.getSelectedIndex();
-
-                Course editCourse = Course.CourseArray.get(editIndex);
-
-                String day = editCourse.getDay();
-                String courseEdit = editCourse.getCourse();
-
-                ArrayList<String> collisionStudents = new ArrayList<>();
-                collisionStudents = timeConsistancyChecker(courseEdit, day, newStart, newEnd);
-
-                if (collisionStudents.isEmpty()) {
-                    Course.CourseArray.get(editIndex).setStartTime(newStart);
-                    Course.CourseArray.get(editIndex).setEndTime(newEnd);
-
-                    editLine = editCourse.getCourse() + "," + editCourse.getRoom() + "," +
-                            editCourse.getDay() + "," + newStart + "," +
-                            newEnd;
-
-                    Application.editCSVFile("src/csv/timetable.csv", editIndex, editLine);
-
-                    System.out.println(editLine);
 
                     timetableListModel.clear();
 
@@ -484,43 +344,242 @@ public class AdminGUI extends JFrame{
                         timetableListModel.addElement(courseInfo);
                     }
 
-                } else{
-
-                    System.out.printf("Cannot change course because of collision, change time or remove students from Course. \nCollision students are:");
-
-                    for(String collisionStudent : collisionStudents){
-                        System.out.printf(" " + collisionStudent);
-                    }
-
+                } catch (Exception e2) {
+                    System.out.println("No course selected.");
                 }
             }
 
         });
 
+        //####### Edit Room #######
+
+        //adds room to list
+        addButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String addRoomString = textField2.getText();
+                if (!addRoomString.isBlank()) {
+
+                    Application.writeToCSVFile(addRoomString, "src/csv/rooms.csv");
+
+                    Room newRoom = new Room();
+                    newRoom.setRoom(addRoomString);
+                    Room.RoomArray.add(newRoom);
+
+                    roomListModel.clear();
+
+                    for (Room room : Room.RoomArray) {
+                        roomListModel.addElement(room.getRoom());
+                    }
+                }
+
+            }
+        });
+
+        //deletes room from list
+        deleteSelectedRoomButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                try {
+
+                    int deleteLine = eRoomList.getSelectedIndex();
+                    String roomString = eRoomList.getSelectedValue().toString();
+
+                    if (deleteLine == 0) {
+
+                        System.out.println("noroom cannot be deleted.");
+
+                    } else {
+
+
+                        System.out.println(deleteLine);
+
+                        Application.deleteFromCSVFile("src/csv/rooms.csv", deleteLine);
+                        Room.RoomArray.remove(deleteLine);
+
+                        removeRoomfromCourse("src/csv/timetable.csv", roomString);
+
+                        for (Course courseElement : Course.CourseArray) {
+
+                            if (courseElement.getRoom().equals(roomString)) {
+                                courseElement.setRoom("noroom");
+                            }
+                        }
+
+                        roomListModel.clear();
+                        for (Room room : Room.RoomArray) {
+                            roomListModel.addElement(room.getRoom());
+                        }
+
+                        timetableListModel.clear();
+
+                        for (Course course : Course.CourseArray) {
+
+                            String courseInfo = "";
+                            courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
+                                    ". Date: " + course.getDay() + ", " + course.getStartTime() + "-" + course.getEndTime() +
+                                    " o'clock";
+
+                            timetableListModel.addElement(courseInfo);
+                        }
+
+                    }
+
+                } catch (Exception e2) {
+                    System.out.println("No room selected.");
+                }
+            }
+        });
+
+        /*
+        ################### EDIT COURSES ###################
+         */
+
+        //changes room from set course
+        changeRoomButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                try {
+                    String editLine = "";
+                    String editRoom = eRoomList2.getSelectedValue().toString();
+                    int editIndex = eTimetableList.getSelectedIndex();
+
+                    Course editCourse = Course.CourseArray.get(editIndex);
+
+                    if ((roomConsistancyChecker(editRoom, editCourse.getDay(), editCourse.getStartTime(), editCourse.getEndTime())) || editRoom.equals("noroom")) {
+
+                        Course.CourseArray.get(editIndex).setRoom(editRoom);
+
+                        editLine = editCourse.getCourse() + "," + editRoom + "," +
+                                editCourse.getDay() + "," + editCourse.getStartTime() + "," +
+                                editCourse.getEndTime();
+
+                        Application.editCSVFile("src/csv/timetable.csv", editIndex, editLine);
+
+                        System.out.println(editLine);
+
+                        timetableListModel.clear();
+
+                        for (Course course : Course.CourseArray) {
+
+                            String courseInfo = "";
+                            courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
+                                    ". Date: " + course.getDay() + ", " + course.getStartTime() + "-" + course.getEndTime() +
+                                    " o'clock";
+
+                            timetableListModel.addElement(courseInfo);
+
+                        }
+
+                    } else {
+                        System.out.println("Selected room not available.");
+                    }
+                } catch (Exception e2) {
+                    System.out.println("Not everyhing is selected.");
+                }
+
+            }
+        });
+
+        //changes time from set course
+        confrimEditButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                try {
+                    String editLine = "";
+                    int newStart = Integer.parseInt(comboBox6.getSelectedItem().toString());
+                    int newEnd = Integer.parseInt(comboBox9.getSelectedItem().toString());
+                    int editIndex = eTimetableList.getSelectedIndex();
+
+                    if (newStart >= newEnd) {
+                        System.out.println("End time < Start time");
+                        return;
+                    }
+
+                    Course editCourse = Course.CourseArray.get(editIndex);
+
+                    String day = editCourse.getDay();
+                    String courseEdit = editCourse.getCourse();
+
+                    ArrayList<String> collisionStudents = new ArrayList<>();
+                    collisionStudents = timeConsistancyChecker(courseEdit, day, newStart, newEnd);
+
+                    if (collisionStudents.isEmpty()) {
+                        Course.CourseArray.get(editIndex).setStartTime(newStart);
+                        Course.CourseArray.get(editIndex).setEndTime(newEnd);
+
+                        editLine = editCourse.getCourse() + "," + editCourse.getRoom() + "," +
+                                editCourse.getDay() + "," + newStart + "," +
+                                newEnd;
+
+                        Application.editCSVFile("src/csv/timetable.csv", editIndex, editLine);
+
+                        System.out.println(editLine);
+
+                        timetableListModel.clear();
+
+                        for (Course course : Course.CourseArray) {
+
+                            String courseInfo = "";
+                            courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
+                                    ". Date: " + course.getDay() + ", " + course.getStartTime() + "-" + course.getEndTime() +
+                                    " o'clock";
+
+                            timetableListModel.addElement(courseInfo);
+                        }
+
+                    } else {
+
+                        System.out.printf("Cannot change course because of collision, change time or remove students from Course. \nCollision students are:");
+
+                        for (String collisionStudent : collisionStudents) {
+                            System.out.printf(" " + collisionStudent);
+                        }
+
+                    }
+                } catch (Exception e2) {
+                    System.out.println("Not everything is selected.");
+                }
+
+            }
+
+        });
+
+        //deletes whole course from list
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int deleteLine = eTimetableList.getSelectedIndex();
+                try {
 
-                Application.deleteFromCSVFile("src/csv/timetable.csv",deleteLine);
-                Course.CourseArray.remove(deleteLine);
+                    int deleteLine = eTimetableList.getSelectedIndex();
 
-                timetableListModel.clear();
+                    Application.deleteFromCSVFile("src/csv/timetable.csv", deleteLine);
+                    Course.CourseArray.remove(deleteLine);
 
-                for(Course course : Course.CourseArray){
+                    timetableListModel.clear();
 
-                    String courseInfo = "";
-                    courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
-                            ". Date: " + course.getDay() + ", " +course.getStartTime() + "-" + course.getEndTime()+
-                            " o'clock";
+                    for (Course course : Course.CourseArray) {
 
-                    timetableListModel.addElement(courseInfo);
+                        String courseInfo = "";
+                        courseInfo = "Course: " + course.getCourse() + ". Room: " + course.getRoom() +
+                                ". Date: " + course.getDay() + ", " + course.getStartTime() + "-" + course.getEndTime() +
+                                " o'clock";
+
+                        timetableListModel.addElement(courseInfo);
+                    }
+
+                } catch (Exception e2) {
+                    System.out.println("Not everything selected.");
                 }
-
             }
         });
 
+        //goes back to main menu
         backButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -547,20 +606,27 @@ public class AdminGUI extends JFrame{
         addRemoveStudentsFromButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(panelMain, "panel4");
 
-                studentListModel.clear();
-                selectedCourseListModel.clear();
-                courseListModel.clear();
+                try {
 
-                for(String course: Course.CourseListArray){
-                    courseListModel.addElement(course);
-                }
+                    cardLayout.show(panelMain, "panel4");
 
-                for(Person person : Person.PersonArray){
-                    if(person.isStudentStatus()){
-                        studentListModel.addElement(person.getUsername());
+                    studentListModel.clear();
+                    selectedCourseListModel.clear();
+                    courseListModel.clear();
+
+                    for (String course : Course.CourseListArray) {
+                        courseListModel.addElement(course);
                     }
+
+                    for (Person person : Person.PersonArray) {
+                        if (person.isStudentStatus()) {
+                            studentListModel.addElement(person.getUsername());
+                        }
+                    }
+
+                } catch (Exception e2) {
+                    System.out.println("Not everything selected");
                 }
             }
         });
@@ -569,21 +635,20 @@ public class AdminGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                System.out.println("hi");
-
                 try {
                     String username = studentList.getSelectedValue().toString();
                     String courseName = courseList.getSelectedValue().toString();
 
-                    if(slctdLbl.getText().equals("none")){
+                    if (slctdLbl.getText().equals("none")) {
+                        studentMsg.setText("Select Student");
                         studentMsg.setText("Select Student");
 
                     } else {
-                        for(Person student : Person.PersonArray){
+                        for (Person student : Person.PersonArray) {
 
-                            if(student.getUsername().equals(username)){
+                            if (student.getUsername().equals(username)) {
 
-                                if(StudentGUI.checkConsistancy(student, courseName)) {
+                                if (StudentGUI.checkConsistancy(student, courseName)) {
 
                                     StudentGUI.addDelCourse("src/csv/students.csv", student, courseName, true); //true add, false remove
 
@@ -594,8 +659,9 @@ public class AdminGUI extends JFrame{
                                         selectedCourseListModel.addElement(course);
                                     }
 
-                                }else {
+                                } else {
                                     System.out.println("Already booked other courses at that time!");
+                                    studentMsg.setText("Already booked other courses at that time!");
                                 }
 
                                 break;
@@ -604,38 +670,41 @@ public class AdminGUI extends JFrame{
                         }
                     }
 
-                } catch (Exception e5){
+                } catch (Exception e5) {
                     studentMsg.setText("Select student and course.");
-                    e5.printStackTrace();
                 }
-
-
             }
         });
 
+        //selects students and show students courses
         selectStudentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String username = studentList.getSelectedValue().toString();
+                try {
 
+                    String username = studentList.getSelectedValue().toString();
 
-                selectedCourseListModel.clear();
+                    selectedCourseListModel.clear();
 
-                for(Person student : Person.PersonArray){
-                    if(student.getUsername().equals(username)){
-                        Person user = student;
-                        slctdLbl.setText(username);
+                    for (Person student : Person.PersonArray) {
+                        if (student.getUsername().equals(username)) {
+                            Person user = student;
+                            slctdLbl.setText(username);
 
-                        for (String course : user.getStudentCourseList()) {
-                            selectedCourseListModel.addElement(course);
+                            for (String course : user.getStudentCourseList()) {
+                                selectedCourseListModel.addElement(course);
+                            }
                         }
                     }
-                }
 
+                } catch (Exception e2) {
+                    System.out.println("Not everything selected.");
+                }
             }
         });
 
+        //goes back to main menu
         backButton4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -643,6 +712,7 @@ public class AdminGUI extends JFrame{
             }
         });
 
+        //remove student from selected course
         removeStudentFromSelectedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -651,14 +721,14 @@ public class AdminGUI extends JFrame{
                     String username = studentList.getSelectedValue().toString();
                     String removeCourse = selectedCourseList.getSelectedValue().toString();
 
-                    if(username.equals("none")){
+                    if (username.equals("none")) {
                         studentMsg.setText("Select Student");
 
                     } else {
 
-                        for(Person student : Person.PersonArray){
+                        for (Person student : Person.PersonArray) {
 
-                            if(student.getUsername().equals(username)){
+                            if (student.getUsername().equals(username)) {
 
                                 StudentGUI.addDelCourse("src/csv/students.csv", student, removeCourse, false); //true add, false remove
 
@@ -674,7 +744,7 @@ public class AdminGUI extends JFrame{
 
                     }
 
-                } catch (Exception e5){
+                } catch (Exception e5) {
                     studentMsg.setText("No Student selected");
                 }
 
@@ -683,9 +753,8 @@ public class AdminGUI extends JFrame{
 
         });
 
-
          /*
-        ################### END ###################
+        ################### NAVIGATION BUTTONS ###################
          */
 
 
@@ -743,30 +812,35 @@ public class AdminGUI extends JFrame{
         });
     }
 
-    static ArrayList<String> timeConsistancyChecker(String editCourse, String day, int startTime, int endTime){
+      /*
+       ################### METHODS ###################
+        */
+
+    //checks time consistancy
+    static ArrayList<String> timeConsistancyChecker(String editCourse, String day, int startTime, int endTime) {
 
         ArrayList<String> stringList = new ArrayList<>();
         boolean studentIsInCourse = false;
 
-        for(Person allStudents : Person.PersonArray){
+        for (Person allStudents : Person.PersonArray) {
 
-            if(allStudents.isStudentStatus()){
+            if (allStudents.isStudentStatus()) {
                 studentIsInCourse = false;
 
-                for(String studentCourse : allStudents.getStudentCourseList()){
+                for (String studentCourse : allStudents.getStudentCourseList()) {
 
-                    if(studentCourse.equals(editCourse)){
+                    if (studentCourse.equals(editCourse)) {
                         studentIsInCourse = true;
                     }
                 }
 
-                if(studentIsInCourse) {
+                if (studentIsInCourse) {
 
-                    for(String studentCourse : allStudents.getStudentCourseList()){
+                    for (String studentCourse : allStudents.getStudentCourseList()) {
 
-                        for(Course allCourses : Course.CourseArray){
+                        for (Course allCourses : Course.CourseArray) {
 
-                            if(allCourses.getCourse().equals(studentCourse) && allCourses.getDay().equals(day) && !(allCourses.getCourse().equals(editCourse))){
+                            if (allCourses.getCourse().equals(studentCourse) && allCourses.getDay().equals(day) && !(allCourses.getCourse().equals(editCourse))) {
 
                                 int c1_S = allCourses.getStartTime();
                                 int c1_E = allCourses.getEndTime();
@@ -774,12 +848,16 @@ public class AdminGUI extends JFrame{
                                 int c2_S = startTime;
                                 int c2_E = endTime;
 
-                                if((c2_S <= c1_S) && (c2_E > c1_S)){
-                                    stringList.add(allStudents.getUsername());
+                                if ((c2_S <= c1_S) && (c2_E > c1_S)) {
+                                    if (stringList.contains(allStudents.getUsername()) == false) {
+                                        stringList.add(allStudents.getUsername());
+                                    }
                                 }
 
-                                if((c2_S < c1_E) && (c2_S >= c1_S)){
-                                    stringList.add(allStudents.getUsername());
+                                if ((c2_S < c1_E) && (c2_S >= c1_S)) {
+                                    if (stringList.contains(allStudents.getUsername()) == false) {
+                                        stringList.add(allStudents.getUsername());
+                                    }
                                 }
 
                             }
@@ -793,16 +871,18 @@ public class AdminGUI extends JFrame{
         return stringList;
     }
 
-    static boolean roomConsistancyChecker(String room, String day, int startTime, int endTime){
 
-        for(Course existingCourse : Course.CourseArray){
+    //checks room consistancy
+    static boolean roomConsistancyChecker(String room, String day, int startTime, int endTime) {
 
-            if(existingCourse.getRoom().equals(room) && existingCourse.getDay().equals(day)){
-                if(existingCourse.getStartTime()>= startTime && existingCourse.getStartTime()<endTime){
+        for (Course existingCourse : Course.CourseArray) {
+
+            if (existingCourse.getRoom().equals(room) && existingCourse.getDay().equals(day)) {
+                if (existingCourse.getStartTime() >= startTime && existingCourse.getStartTime() < endTime) {
                     return false;
                 }
 
-                if(existingCourse.getEndTime()<startTime && existingCourse.getEndTime() > startTime){
+                if (existingCourse.getEndTime() < startTime && existingCourse.getEndTime() > startTime) {
                     return false;
                 }
 
@@ -813,6 +893,7 @@ public class AdminGUI extends JFrame{
         return true;
     }
 
+    //removes room from course if whole room is being deleted
     static void removeRoomfromCourse(String filePath, String room) {
 
         List<String> lines = new ArrayList<>();
@@ -836,26 +917,26 @@ public class AdminGUI extends JFrame{
 
                     editString = tokenizer.nextToken();
 
-                    if(tokenizer.hasMoreTokens() && data[1].equals(room)){
+                    if (tokenizer.hasMoreTokens() && data[1].equals(room)) {
 
                         String nextString = tokenizer.nextToken();
                         editString = editString + ",noroom";
 
                         while (tokenizer.hasMoreTokens()) {
 
-                                nextString = tokenizer.nextToken();
-                                editString = editString + "," + nextString;
+                            nextString = tokenizer.nextToken();
+                            editString = editString + "," + nextString;
 
-                            }
+                        }
 
                         lines.add(editString);
                         edited = true;
 
-                        }
-
                     }
 
-                if(edited==false){
+                }
+
+                if (edited == false) {
                     lines.add(line);
                 }
 
@@ -880,8 +961,5 @@ public class AdminGUI extends JFrame{
         } catch (IOException e) {
             System.out.println(e);
         }
-
-
     }
-
 }
